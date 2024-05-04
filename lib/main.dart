@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // all the async await code here
+
+  // FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
