@@ -9,5 +9,8 @@
         "**/*.freezed.dart": true,
         "**/*.g.dart": true
     },
-    "hide-files.files": []
+    "hide-files.files": [],
+    "cSpell.words": [
+        "Skeletonizer"
+    ]
 }

@@ -1,10 +1,8 @@
 import 'package:enjoy_television/dashboard/providers/index_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../home/home_scree.dart';
-import '../../themes/theme.dart';
+import '../../home/home_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -22,17 +20,6 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomBar = ref.watch(bottomBarNotifierProvider);
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Enjoy Television'),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.sunny),
-      //       onPressed: () {
-      //         ref.read(themeNotifierProvider.notifier).toggle();
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: _buildScreens()[bottomBar.currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -79,7 +66,7 @@ class BottomBatItem extends ConsumerWidget {
               width: bottomBar.currentIndex == navItem.index ? 70 : 40,
               decoration: BoxDecoration(
                 color: bottomBar.currentIndex == navItem.index
-                    ? Colors.red.withOpacity(0.4)
+                    ? Colors.grey.withOpacity(0.2)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -94,7 +81,7 @@ class BottomBatItem extends ConsumerWidget {
                   ? Theme.of(context)
                       .textTheme
                       .titleSmall!
-                      .copyWith(color: Colors.red.withOpacity(0.8))
+                      .copyWith(color: Colors.white.withOpacity(0.8))
                   : Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: Theme.of(context)
                           .textTheme

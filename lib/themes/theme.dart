@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -92,6 +93,13 @@ final ThemeData darkTheme = ThemeData(
       primary: Colors.deepPurple,
       onPrimary: Colors.white,
     ),
+    cardTheme: const CardTheme(
+      color: Color(0xFF191919),
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         textStyle:
@@ -113,6 +121,7 @@ final ThemeData darkTheme = ThemeData(
       labelLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
       labelMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
       labelSmall: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+      titleLarge: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
     ));
 
 /// Defines the `lightTheme` for the application.

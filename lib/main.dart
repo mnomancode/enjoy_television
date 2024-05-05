@@ -39,6 +39,7 @@ class MyApp extends ConsumerWidget {
     final theme = ref.watch(themeNotifierProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Enjoy Television',
       themeMode: theme.mode,
       theme: lightTheme,

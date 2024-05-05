@@ -1,0 +1,41 @@
+class AppUtils {
+  static List<Map<String, dynamic>> extractData(String text) {
+    RegExp urlRegex = RegExp(r'(https?://\S+)');
+    RegExp postNameRegex = RegExp(r'<post_name>(.*?)</post_name>');
+    RegExp dateRegex = RegExp(
+        r'\b[a-zA-Z]{3}, \d{2} \b[a-zA-Z]{3} \d{4} \d{2}:\d{2}:\d{2} \+\d{4}');
+    RegExp imageUrlRegex = RegExp(r'(https?://\S+\.(?:png|jpg|jpeg))');
+
+    List<Map<String, String>> extractedData = [];
+
+    Iterable<RegExpMatch> urlMatches = urlRegex.allMatches(text);
+    Iterable<RegExpMatch> postNameMatches = postNameRegex.allMatches(text);
+    Iterable<RegExpMatch> dateMatches = dateRegex.allMatches(text);
+    Iterable<RegExpMatch> imageUrlMatches = imageUrlRegex.allMatches(text);
+
+    Iterator<RegExpMatch> urlIterator = urlMatches.iterator;
+    Iterator<RegExpMatch> postNameIterator = postNameMatches.iterator;
+    Iterator<RegExpMatch> dateIterator = dateMatches.iterator;
+    Iterator<RegExpMatch> imageUrlIterator = imageUrlMatches.iterator;
+
+    while (urlIterator.moveNext() &&
+        postNameIterator.moveNext() &&
+        dateIterator.moveNext() &&
+        imageUrlIterator.moveNext()) {
+      // Replace hyphens with spaces and capitalize words after hyphens
+      String postName = postNameIterator.current.group(1)!;
+      postName = postName.replaceAll('-', ' ');
+      postName = postName.split(' ').map((word) {
+        return word[0].toUpperCase() + word.substring(1);
+      }).join(' ');
+
+      extractedData.add({
+        'videoUrl': urlIterator.current.group(0)!,
+        'title': postName,
+        'date': dateIterator.current.group(0)!,
+        'imageUrl': imageUrlIterator.current.group(0)!,
+      });
+    }
+    return extractedData;
+  }
+}
