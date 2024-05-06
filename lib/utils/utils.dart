@@ -1,5 +1,22 @@
+import 'package:enjoy_television/extensions/string_extension.dart';
+import 'package:html/parser.dart';
+
 class AppUtils {
-  static List<Map<String, dynamic>> extractData(String text) {
+  static List<Map<String, dynamic>>? extractData(String path, data) {
+    switch (path) {
+      case 'djset.php' || 'festivals.php':
+        return _getDataFromHtmlDjset(data);
+
+      case 'video.php':
+        return _getVideosData(data);
+
+      default:
+        return _getDataFromHtmlDjset(data);
+    }
+  }
+
+// video.php
+  static List<Map<String, dynamic>> _getVideosData(String text) {
     RegExp urlRegex = RegExp(r'(https?://\S+)');
     RegExp postNameRegex = RegExp(r'<post_name>(.*?)</post_name>');
     RegExp dateRegex = RegExp(
@@ -22,7 +39,6 @@ class AppUtils {
         postNameIterator.moveNext() &&
         dateIterator.moveNext() &&
         imageUrlIterator.moveNext()) {
-      // Replace hyphens with spaces and capitalize words after hyphens
       String postName = postNameIterator.current.group(1)!;
       postName = postName.replaceAll('-', ' ');
       postName = postName.split(' ').map((word) {
@@ -36,6 +52,30 @@ class AppUtils {
         'imageUrl': imageUrlIterator.current.group(0)!,
       });
     }
+    return extractedData;
+  }
+
+// djset.php
+  static List<Map<String, dynamic>>? _getDataFromHtmlDjset(String html) {
+    List<Map<String, String>> extractedData = [];
+
+    var document = parse(html);
+
+    var immagine = document.querySelectorAll('.immagine');
+
+    for (var item in immagine) {
+      var aHref = item.querySelector('a')?.attributes['href'];
+      var imagePath = item.attributes['style'];
+      var h2Text = item.nextElementSibling?.text;
+
+      extractedData.add({
+        'videoUrl': aHref.toString(),
+        'imageUrl': imagePath!.matchRegExp(r"url\('([^']*)'\)"),
+        'title': h2Text.toString(),
+        'date': '',
+      });
+    }
+
     return extractedData;
   }
 }

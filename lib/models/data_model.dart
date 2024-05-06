@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/utils/utils.dart';
@@ -28,10 +29,14 @@ class DataModelNotifier extends _$DataModelNotifier {
 
   FutureOr<List<DataModel>> _fetchData(String path) async {
     DioClient dioClient = DioClient();
-    // var response = await dioClient.getVideos('video.php');
     var response = await dioClient.getVideos(path);
 
-    var jsonData = AppUtils.extractData(response.data);
+    var jsonData = AppUtils.extractData(path, response.data);
+
+    if (jsonData == null) {
+      log('jsonData is null');
+      return [];
+    }
 
     return jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
   }
