@@ -11,7 +11,7 @@ class VideosWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(dataModelNotifierProvider);
+    final data = ref.watch(dataModelNotifierProvider('video.php'));
 
     return Padding(
       padding: const EdgeInsets.all(10.0),

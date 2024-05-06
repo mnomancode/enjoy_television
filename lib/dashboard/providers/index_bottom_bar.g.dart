@@ -6,7 +6,7 @@ part of 'index_bottom_bar.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bottomBarNotifierHash() => r'a1a8810d6fc5897cd4900016da29591de68de193';
+String _$bottomBarNotifierHash() => r'279c34bd2cfcbfa4572a5ee2d8501a009b4e6749';
 
 /// See also [BottomBarNotifier].
 @ProviderFor(BottomBarNotifier)
