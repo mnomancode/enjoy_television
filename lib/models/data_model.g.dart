@@ -11,7 +11,8 @@ _$DataModelImpl _$$DataModelImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       imageUrl: json['imageUrl'] as String,
       videoUrl: json['videoUrl'] as String,
-      date: json['date'] as String,
+      date: json['date'] as String?,
+      pagePath: json['pagePath'] as String?,
     );
 
 Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
@@ -20,13 +21,14 @@ Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
       'imageUrl': instance.imageUrl,
       'videoUrl': instance.videoUrl,
       'date': instance.date,
+      'pagePath': instance.pagePath,
     };
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dataModelNotifierHash() => r'9e3567203f99106aa729261027b7be19f370a819';
+String _$dataModelNotifierHash() => r'e6e8961a99c1b8d05e31053e08b4cdaf366bcaa7';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             TvChannelWidget(),
-            VideosWidget(path: 'festivals.php', title: 'Festivals & Clubs'),
+            VideosWidget(path: 'mob_festivals.php', title: 'Festivals & Clubs'),
             VideosWidget(path: 'djset.php', title: 'DJset'),
             VideosWidget(path: 'videoclip.php', title: 'Videoclip'),
             VideosWidget(path: 'enjoytv.php', title: 'EnjoyTV'),

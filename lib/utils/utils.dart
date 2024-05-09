@@ -57,7 +57,7 @@ class AppUtils {
 
 // djset.php
   static List<Map<String, dynamic>>? _getDataFromHtmlDjset(String html) {
-    List<Map<String, String>> extractedData = [];
+    List<Map<String, dynamic>> extractedData = [];
 
     var document = parse(html);
 
@@ -67,12 +67,18 @@ class AppUtils {
       var aHref = item.querySelector('a')?.attributes['href'];
       var imagePath = item.attributes['style'];
       var h2Text = item.nextElementSibling?.text;
+      var date = item.nextElementSibling?.nextElementSibling?.text;
+      var postLink = item
+          .nextElementSibling?.nextElementSibling?.nextElementSibling
+          ?.querySelector('a')
+          ?.attributes['href'];
 
       extractedData.add({
         'videoUrl': aHref.toString(),
         'imageUrl': imagePath!.matchRegExp(r"url\('([^']*)'\)"),
         'title': h2Text.toString(),
-        'date': '',
+        'date': date,
+        'postLink': postLink,
       });
     }
 

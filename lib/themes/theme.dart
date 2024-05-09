@@ -83,6 +83,10 @@ extension InvertColor on TextStyle {
   TextStyle get redColor {
     return copyWith(color: Colors.red);
   }
+
+  TextStyle get greyColor {
+    return copyWith(color: const Color(0xFF878787));
+  }
 }
 
 /// Defines the `darkTheme` for the application.

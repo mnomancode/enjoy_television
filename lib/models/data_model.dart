@@ -48,7 +48,8 @@ class DataModel with _$DataModel {
     required String title,
     required String imageUrl,
     required String videoUrl,
-    required String date,
+    String? date,
+    String? pagePath,
   }) = _DataModel;
 
   factory DataModel.fromJson(Map<String, dynamic> json) =>

@@ -1,11 +1,12 @@
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'router/router.dart';
 
-void main() {
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+Future<void> main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // all the async await code here
@@ -27,6 +28,8 @@ void main() {
   //     return const Center(child: CircularProgressIndicator());
   //   })),
   // )));
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const ProviderScope(child: MyApp()));
 }
