@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enjoy_television/themes/theme.dart';
+import 'package:enjoy_television/video_player/video_player_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../loading_widgets/app_shimmer.dart';
-import '../../loading_widgets/grid_videos_loading.dart';
 import '../../loading_widgets/hor_list_view_loading.dart';
 import '../../models/data_model.dart';
 
@@ -43,12 +43,22 @@ class VideosWidget extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        log(data[index].videoUrl);
+                        ref
+                            .read(videPlayerProvider.notifier)
+                            .updateDataModel(DataModel(
+                              title: data[index].title,
+                              imageUrl: data[index].imageUrl,
+                              videoUrl: data[index].videoUrl,
+                              date: data[index].date,
+                              pagePath: data[index].pagePath,
+                            ));
                         context.goNamed('play-video', queryParameters: {
+                          'pageTitle': title,
                           'title': data[index].title,
                           'pageUrl': data[index].pagePath,
                           'videoUrl': data[index].videoUrl,
                           'date': data[index].date ?? '',
+                          'phpPath': path,
                         });
                       },
                       child: Card(

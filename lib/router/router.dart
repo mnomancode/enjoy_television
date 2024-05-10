@@ -19,10 +19,12 @@ final router = GoRouter(
           path: 'play-video',
           pageBuilder: (context, state) => MaterialPage(
               child: VidePlayerScreen(
-            title: state.uri.queryParameters['title'] ?? '',
+            pageTitle: state.uri.queryParameters['pageTitle'] ?? '',
+            phpPath: state.uri.queryParameters['phpPath'] ?? '',
             pageUrl: state.uri.queryParameters['pageUrl'] ?? '',
             videoUrl: state.uri.queryParameters['videoUrl'] ?? '',
             date: state.uri.queryParameters['date'] ?? '',
+            title: state.uri.queryParameters['title'] ?? '',
           )),
         ),
       ],

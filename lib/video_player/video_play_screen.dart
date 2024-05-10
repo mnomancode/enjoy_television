@@ -1,139 +1,71 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
+import 'package:enjoy_television/video_player/new_youtube_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../home/widgets/grid_videos_widget.dart';
-import '../home/widgets/videos_widget.dart';
+import 'video_player_provider.dart';
 
-class VidePlayerScreen extends StatefulWidget {
+class VidePlayerScreen extends ConsumerWidget {
   const VidePlayerScreen(
       {super.key,
-      this.title,
+      required this.pageTitle,
+      required this.phpPath,
       this.pageUrl,
+      this.title,
       required this.videoUrl,
       required this.date});
-  final String? title;
+  final String? pageTitle;
+  final String phpPath;
   final String? pageUrl;
   final String videoUrl;
   final String date;
+  final String? title;
 
   @override
-  State<VidePlayerScreen> createState() => _VidePlayerScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final videProvider = ref.watch(videPlayerProvider);
 
-class _VidePlayerScreenState extends State<VidePlayerScreen> {
-  late YoutubePlayerController _controller;
-  late PlayerState _playerState;
-  late YoutubeMetaData _videoMetaData;
-  bool _isPlayerReady = false;
-  bool _isFullScreen = false;
+    return OrientationBuilder(builder: (context, orientation) {
+      final bool isFullScreen = orientation == Orientation.landscape;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
-      flags: const YoutubePlayerFlags(
-        mute: false,
-        autoPlay: true,
-        disableDragSeek: false,
-        loop: false,
-        isLive: false,
-        forceHD: false,
-        enableCaption: true,
-      ),
-    )..addListener(listener);
-
-    _videoMetaData = const YoutubeMetaData();
-    _playerState = PlayerState.unknown;
-  }
-
-  void listener() {
-    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
-      setState(() {
-        _playerState = _controller.value.playerState;
-        _videoMetaData = _controller.metadata;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _isFullScreen
-          ? null
-          : AppBar(
-              title: Text(widget.title!),
-              actions: [
+      return Scaffold(
+        appBar: isFullScreen
+            ? null
+            : AppBar(
+                title: Text(pageTitle ?? '',
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
+        body: NewYoutubePlayer(
+            videoUrl: videProvider?.videoUrl ?? videoUrl,
+            titleWidget: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  height: 80,
+                  child: Text(
+                    videProvider?.title ?? title ?? '',
+                    style: Theme.of(context).textTheme.titleLarge,
+                    maxLines: 2,
+                  ),
+                ),
+                Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.favorite_border_sharp),
+                  onPressed: () {},
+                ),
+                SizedBox(width: 10),
                 IconButton(
                   icon: const Icon(Icons.share),
                   onPressed: () {},
                 ),
               ],
             ),
-      body: YoutubePlayerBuilder(
-        onEnterFullScreen: () {
-          SystemChrome.setPreferredOrientations(
-              [DeviceOrientation.landscapeLeft]);
-          setState(() {
-            _isFullScreen = true;
-          });
-        },
-        onExitFullScreen: () {
-          SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-          setState(() {
-            _isFullScreen = false;
-          });
-        },
-        player: YoutubePlayer(
-          aspectRatio: 16 / 9,
-          actionsPadding: const EdgeInsets.only(left: 16.0, bottom: 300),
-          controller: _controller,
-          progressColors: const ProgressBarColors(
-            playedColor: Colors.red,
-            handleColor: Colors.redAccent,
-            backgroundColor: Colors.grey,
-          ),
-          topActions: [
-            const SizedBox(width: 8.0),
-            Expanded(
-              child: Text(
-                _controller.metadata.title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.settings,
-                color: Colors.white,
-                size: 25.0,
-              ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        builder: (context, player) {
-          return Column(
-            children: [
-              Expanded(flex: 2, child: player),
-              Expanded(
-                flex: 5,
-                child: GridVideosWidget(
-                    path: 'mob_festivals.php', title: 'Festivals & Clubs'),
-              ),
-            ],
-          );
-        },
-      ),
-    );
+            child: GridVideosWidget(path: phpPath, title: 'More Videos...')),
+      );
+    });
   }
 }

@@ -28,7 +28,7 @@ Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dataModelNotifierHash() => r'e6e8961a99c1b8d05e31053e08b4cdaf366bcaa7';
+String _$getVideosHash() => r'9da16579b66cfc521a0a524dd8de5e3aee6ef5a1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -50,6 +50,135 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [getVideos].
+@ProviderFor(getVideos)
+const getVideosProvider = GetVideosFamily();
+
+/// See also [getVideos].
+class GetVideosFamily extends Family<AsyncValue<List<DataModel>>?> {
+  /// See also [getVideos].
+  const GetVideosFamily();
+
+  /// See also [getVideos].
+  GetVideosProvider call(
+    String path,
+  ) {
+    return GetVideosProvider(
+      path,
+    );
+  }
+
+  @override
+  GetVideosProvider getProviderOverride(
+    covariant GetVideosProvider provider,
+  ) {
+    return call(
+      provider.path,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getVideosProvider';
+}
+
+/// See also [getVideos].
+class GetVideosProvider
+    extends AutoDisposeProvider<AsyncValue<List<DataModel>>?> {
+  /// See also [getVideos].
+  GetVideosProvider(
+    String path,
+  ) : this._internal(
+          (ref) => getVideos(
+            ref as GetVideosRef,
+            path,
+          ),
+          from: getVideosProvider,
+          name: r'getVideosProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getVideosHash,
+          dependencies: GetVideosFamily._dependencies,
+          allTransitiveDependencies: GetVideosFamily._allTransitiveDependencies,
+          path: path,
+        );
+
+  GetVideosProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.path,
+  }) : super.internal();
+
+  final String path;
+
+  @override
+  Override overrideWith(
+    AsyncValue<List<DataModel>>? Function(GetVideosRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetVideosProvider._internal(
+        (ref) => create(ref as GetVideosRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        path: path,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<AsyncValue<List<DataModel>>?> createElement() {
+    return _GetVideosProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetVideosProvider && other.path == path;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, path.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GetVideosRef on AutoDisposeProviderRef<AsyncValue<List<DataModel>>?> {
+  /// The parameter `path` of this provider.
+  String get path;
+}
+
+class _GetVideosProviderElement
+    extends AutoDisposeProviderElement<AsyncValue<List<DataModel>>?>
+    with GetVideosRef {
+  _GetVideosProviderElement(super.provider);
+
+  @override
+  String get path => (origin as GetVideosProvider).path;
+}
+
+String _$dataModelNotifierHash() => r'e6e8961a99c1b8d05e31053e08b4cdaf366bcaa7';
 
 abstract class _$DataModelNotifier
     extends BuildlessAsyncNotifier<List<DataModel>> {

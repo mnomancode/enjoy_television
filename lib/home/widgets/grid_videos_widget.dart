@@ -1,17 +1,19 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../loading_widgets/app_shimmer.dart';
 import '../../loading_widgets/grid_videos_loading.dart';
 import '../../models/data_model.dart';
+import '../../video_player/video_player_provider.dart';
 
 class GridVideosWidget extends ConsumerWidget {
-  const GridVideosWidget({super.key, required this.path, required this.title});
+  const GridVideosWidget({
+    super.key,
+    required this.path,
+    required this.title,
+  });
   final String path;
   final String title;
 
@@ -42,14 +44,16 @@ class GridVideosWidget extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        ref
+                            .read(videPlayerProvider.notifier)
+                            .updateDataModel(data[index]);
 
-                        context.goNamed('play-video', queryParameters: {
-                          'title': data[index].title,
-                          'pageUrl': data[index].pagePath,
-                          'videoUrl': data[index].videoUrl,
-                          'date': data[index].date ?? '',
-                        });
+                        // context.goNamed('play-video', queryParameters: {
+                        //   'title': data[index].title,
+                        //   'pageUrl': data[index].pagePath,
+                        //   'videoUrl': data[index].videoUrl,
+                        //   'date': data[index].date ?? '',
+                        // });
                       },
                       child: Card(
                         color: const Color(0xFF191919),
