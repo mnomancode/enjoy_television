@@ -11,7 +11,11 @@ class VidePlayer extends _$VidePlayer {
     return null;
   }
 
-  void updateDataModel(DataModel dataModel) {
+  void updateDataModel(DataModel dataModel,
+      {YoutubePlayerController? controller}) {
     state = dataModel;
+    if (controller != null) {
+      controller.load(YoutubePlayer.convertUrlToId(dataModel.videoUrl)!);
+    }
   }
 }

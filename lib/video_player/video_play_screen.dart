@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:enjoy_television/video_player/new_youtube_player.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -8,7 +9,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../home/widgets/grid_videos_widget.dart';
 import 'video_player_provider.dart';
 
-class VidePlayerScreen extends ConsumerWidget {
+class VidePlayerScreen extends ConsumerStatefulWidget {
   const VidePlayerScreen(
       {super.key,
       required this.pageTitle,
@@ -25,7 +26,31 @@ class VidePlayerScreen extends ConsumerWidget {
   final String? title;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VidePlayerScreen> createState() => _VidePlayerScreenState();
+}
+
+class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
+  late YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = YoutubePlayerController(
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: true,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+        ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final videProvider = ref.watch(videPlayerProvider);
 
     return OrientationBuilder(builder: (context, orientation) {
@@ -35,11 +60,12 @@ class VidePlayerScreen extends ConsumerWidget {
         appBar: isFullScreen
             ? null
             : AppBar(
-                title: Text(pageTitle ?? '',
+                title: Text(widget.pageTitle ?? '',
                     style: Theme.of(context).textTheme.titleLarge),
               ),
         body: NewYoutubePlayer(
-            videoUrl: videProvider?.videoUrl ?? videoUrl,
+            controller: _controller,
+            videoUrl: videProvider?.videoUrl ?? widget.videoUrl,
             titleWidget: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,7 +73,7 @@ class VidePlayerScreen extends ConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.6,
                   height: 80,
                   child: Text(
-                    videProvider?.title ?? title ?? '',
+                    videProvider?.title ?? widget.title ?? '',
                     style: Theme.of(context).textTheme.titleLarge,
                     maxLines: 2,
                   ),
@@ -64,7 +90,10 @@ class VidePlayerScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            child: GridVideosWidget(path: phpPath, title: 'More Videos...')),
+            child: GridVideosWidget(
+                controller: _controller,
+                path: widget.phpPath,
+                title: 'More Videos...')),
       );
     });
   }

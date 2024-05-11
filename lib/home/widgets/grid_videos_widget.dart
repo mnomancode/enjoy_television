@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../loading_widgets/app_shimmer.dart';
 import '../../loading_widgets/grid_videos_loading.dart';
@@ -13,9 +14,11 @@ class GridVideosWidget extends ConsumerWidget {
     super.key,
     required this.path,
     required this.title,
+    required this.controller,
   });
   final String path;
   final String title;
+  final YoutubePlayerController controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,6 +50,9 @@ class GridVideosWidget extends ConsumerWidget {
                         ref
                             .read(videPlayerProvider.notifier)
                             .updateDataModel(data[index]);
+
+                        controller.load(YoutubePlayer.convertUrlToId(
+                            data[index].videoUrl)!);
 
                         // context.goNamed('play-video', queryParameters: {
                         //   'title': data[index].title,
