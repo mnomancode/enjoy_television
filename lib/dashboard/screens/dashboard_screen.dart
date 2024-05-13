@@ -1,4 +1,5 @@
 import 'package:enjoy_television/dashboard/providers/index_bottom_bar.dart';
+import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,7 +11,7 @@ class DashboardScreen extends ConsumerWidget {
   List<Widget> _buildScreens() {
     return const [
       HomeScreen(),
-      Center(child: Text('Genre')),
+      GenreScreen(),
       Center(child: Text('Favorite')),
       Center(child: Text('Updates')),
     ];
@@ -66,7 +67,7 @@ class BottomBatItem extends ConsumerWidget {
               width: bottomBar.currentIndex == navItem.index ? 70 : 40,
               decoration: BoxDecoration(
                 color: bottomBar.currentIndex == navItem.index
-                    ? Colors.grey.withOpacity(0.2)
+                    ? Colors.red.withOpacity(0.06)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
               ),

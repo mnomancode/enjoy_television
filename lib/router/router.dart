@@ -1,4 +1,6 @@
+import 'package:enjoy_television/constants/image_path.dart';
 import 'package:enjoy_television/dashboard/screens/dashboard_screen.dart';
+import 'package:enjoy_television/genre/genre_vieos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +29,13 @@ final router = GoRouter(
             title: state.uri.queryParameters['title'] ?? '',
           )),
         ),
+        GoRoute(
+            name: 'genre-videos-screen',
+            path: 'genre-videos-screen',
+            pageBuilder: (context, state) {
+              Genre genre = state.extra as Genre;
+              return MaterialPage(child: GenreVideosScreen(genre: genre));
+            }),
       ],
     ),
     // GoRoute(

@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:enjoy_television/video_player/video_player_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,10 +29,16 @@ class VideosWidget extends ConsumerWidget {
       padding: const EdgeInsets.all(10.0),
       child: Column(
         children: [
-          ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            title: Text(title, style: Theme.of(context).textTheme.titleLarge),
-            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+          SizedBox(
+            height: 45,
+            child: ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              title:
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+              trailing: const Icon(Icons.arrow_forward_ios_sharp),
+              minVerticalPadding: 0,
+            ),
           ),
           data.when(
             data: (data) {
@@ -43,15 +51,16 @@ class VideosWidget extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        ref
-                            .read(videPlayerProvider.notifier)
-                            .updateDataModel(DataModel(
-                              title: data[index].title,
-                              imageUrl: data[index].imageUrl,
-                              videoUrl: data[index].videoUrl,
-                              date: data[index].date,
-                              pagePath: data[index].pagePath,
-                            ));
+                        // ref
+                        //     .read(videPlayerProvider.notifier)
+                        //     .updateDataModel(DataModel(
+                        //       title: data[index].title,
+                        //       imageUrl: data[index].imageUrl,
+                        //       videoUrl: data[index].videoUrl,
+                        //       date: data[index].date,
+                        //       pagePath: data[index].pagePath,
+                        //     ));
+
                         context.goNamed('play-video', queryParameters: {
                           'pageTitle': title,
                           'title': data[index].title,
@@ -72,20 +81,23 @@ class VideosWidget extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                                child: CachedNetworkImage(
-                                  width: 200,
-                                  height: 115,
-                                  fit: BoxFit.cover,
-                                  imageUrl: data[index].imageUrl,
-                                  placeholder: (context, url) =>
-                                      const AppShimmer(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                              Hero(
+                                tag: data[index].videoUrl,
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    width: 200,
+                                    height: 115,
+                                    fit: BoxFit.cover,
+                                    imageUrl: data[index].imageUrl,
+                                    placeholder: (context, url) =>
+                                        const AppShimmer(borderRadius: 0),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -94,9 +106,7 @@ class VideosWidget extends ConsumerWidget {
                                   data[index].title,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                               const Spacer(),

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class NewYoutubePlayer extends StatefulWidget {
@@ -27,7 +27,6 @@ class _NewYoutubePlayerState extends State<NewYoutubePlayer> {
         aspectRatio: 16 / 9,
         actionsPadding: const EdgeInsets.only(left: 16.0, bottom: 300),
         controller: widget.controller,
-        // ..load(YoutubePlayer.convertUrlToId(widget.videoUrl)!),
         progressColors: const ProgressBarColors(
           playedColor: Colors.red,
           handleColor: Colors.redAccent,
@@ -35,14 +34,27 @@ class _NewYoutubePlayerState extends State<NewYoutubePlayer> {
         ),
         topActions: [
           const SizedBox(width: 8.0),
-          Expanded(
-            child: Text(
-              widget.controller.metadata.title,
-              style: const TextStyle(color: Colors.white, fontSize: 18.0),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
+          Row(
+            children: [
+              widget.controller.value.isFullScreen
+                  ? IconButton(
+                      onPressed: () {
+                        widget.controller.toggleFullScreenMode();
+                      },
+                      icon: const Icon(Icons.arrow_back))
+                  : const SizedBox(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: Text(
+                  widget.controller.metadata.title,
+                  style: const TextStyle(color: Colors.white, fontSize: 18.0),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+            ],
           ),
+          const Spacer(),
           IconButton(
             icon: const Icon(CupertinoIcons.play_rectangle_fill,
                 color: Colors.red, size: 25.0),
@@ -54,12 +66,30 @@ class _NewYoutubePlayerState extends State<NewYoutubePlayer> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: player),
-            Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0, vertical: 10.0),
-                child: widget.titleWidget),
-            if (widget.child != null) Expanded(flex: 5, child: widget.child!),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[900],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              margin: const EdgeInsets.symmetric(horizontal: 7),
+              child: Column(
+                children: [
+                  Hero(
+                    tag: widget.videoUrl,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10), child: player),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.11,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 8.0),
+                        child: widget.titleWidget),
+                  ),
+                ],
+              ),
+            ),
+            if (widget.child != null) Expanded(child: widget.child!),
           ],
         );
       },

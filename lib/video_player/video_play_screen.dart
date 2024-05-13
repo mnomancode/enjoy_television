@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:enjoy_television/video_player/new_youtube_player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,36 +65,37 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
                     style: Theme.of(context).textTheme.titleLarge),
               ),
         body: NewYoutubePlayer(
-            controller: _controller,
-            videoUrl: videProvider?.videoUrl ?? widget.videoUrl,
-            titleWidget: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  height: 80,
-                  child: Text(
-                    videProvider?.title ?? widget.title ?? '',
-                    style: Theme.of(context).textTheme.titleLarge,
-                    maxLines: 2,
-                  ),
+          controller: _controller,
+          videoUrl: videProvider?.videoUrl ?? widget.videoUrl,
+          titleWidget: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: 80,
+                child: Text(
+                  videProvider?.title ?? widget.title ?? '',
+                  style: Theme.of(context).textTheme.titleMedium,
+                  maxLines: 3,
                 ),
-                Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.favorite_border_sharp),
-                  onPressed: () {},
-                ),
-                SizedBox(width: 10),
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            child: GridVideosWidget(
-                controller: _controller,
-                path: widget.phpPath,
-                title: 'More Videos...')),
+              ),
+              Spacer(),
+              IconButton(
+                icon: const Icon(Icons.favorite_border_sharp),
+                onPressed: () {},
+              ),
+              SizedBox(width: 10),
+              IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          child: GridVideosWidget(
+              controller: _controller,
+              path: widget.phpPath,
+              title: 'Continue Watching'),
+        ),
       );
     });
   }

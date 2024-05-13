@@ -14,33 +14,32 @@ class GridVideosWidget extends ConsumerWidget {
     super.key,
     required this.path,
     required this.title,
-    required this.controller,
+    this.controller,
   });
   final String path;
   final String title;
-  final YoutubePlayerController controller;
+  final YoutubePlayerController? controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(dataModelNotifierProvider(path));
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            title: Text(title, style: Theme.of(context).textTheme.titleLarge),
-          ),
+          const SizedBox(height: 7),
+          Text(title, style: Theme.of(context).textTheme.titleSmall!.greyColor),
+          const SizedBox(height: 7),
           data.when(
             data: (data) {
               return Expanded(
                 child: GridView.builder(
                   addAutomaticKeepAlives: true,
+                  padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.9,
-                  ),
+                      crossAxisCount: 2, childAspectRatio: 1),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: data.length,
@@ -51,8 +50,10 @@ class GridVideosWidget extends ConsumerWidget {
                             .read(videPlayerProvider.notifier)
                             .updateDataModel(data[index]);
 
-                        controller.load(YoutubePlayer.convertUrlToId(
-                            data[index].videoUrl)!);
+                        if (controller != null) {
+                          controller!.load(YoutubePlayer.convertUrlToId(
+                              data[index].videoUrl)!);
+                        }
 
                         // context.goNamed('play-video', queryParameters: {
                         //   'title': data[index].title,
@@ -79,24 +80,22 @@ class GridVideosWidget extends ConsumerWidget {
                                 ),
                                 child: CachedNetworkImage(
                                   width: 200,
-                                  height: 115,
+                                  height: 100,
                                   fit: BoxFit.cover,
                                   imageUrl: data[index].imageUrl,
                                   placeholder: (context, url) =>
-                                      const AppShimmer(),
+                                      const AppShimmer(borderRadius: 0),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(7, 5, 10, 0),
+                                padding: const EdgeInsets.fromLTRB(7, 5, 20, 0),
                                 child: Text(
                                   data[index].title,
-                                  maxLines: 3,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                               const Spacer(),

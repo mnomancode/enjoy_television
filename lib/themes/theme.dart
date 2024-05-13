@@ -111,7 +111,7 @@ final ThemeData darkTheme = ThemeData(
         foregroundColor: MaterialStateProperty.all(Colors.white),
       ),
     ),
-    iconTheme: const IconThemeData(size: 30, color: Colors.white),
+    iconTheme: const IconThemeData(size: 25, color: Colors.white),
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
       displayMedium: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),

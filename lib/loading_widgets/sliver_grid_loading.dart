@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class GridVideosLoading extends StatelessWidget {
-  const GridVideosLoading({super.key});
+class SliverGridVideosLoading extends StatelessWidget {
+  const SliverGridVideosLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+    return SliverGrid.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 1,
+        childAspectRatio: 0.9,
       ),
-      itemCount: 6,
+      itemCount: 10,
       itemBuilder: (context, index) {
         return Card(
           color: const Color(0xFF191919),
