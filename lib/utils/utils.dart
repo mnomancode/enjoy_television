@@ -84,4 +84,23 @@ class AppUtils {
 
     return extractedData;
   }
+
+  static List<Map<String, dynamic>>? extractNews(item) {
+    List<Map<String, dynamic>> extractedData = [];
+
+    for (var item in item) {
+      extractedData.add({
+        'id': item['id'],
+        'title': item['title']['rendered'],
+        'date': item['date'],
+        'pagePath': item['pagePath'],
+        'htmlContent': item['content']['rendered'],
+        'image': item['yoast_head_json']['og_image'][0]['url'],
+        'readTime': item['yoast_head_json']['twitter_misc']
+            ['Est. reading time'],
+      });
+    }
+
+    return extractedData;
+  }
 }

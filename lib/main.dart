@@ -51,3 +51,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
+
+
+// https://enjoytelevision.com/wp-json/wp/v2/posts/?_fields[]=author&_fields[]=id&_fields[]=title&_fields[]=link&_fields[]=content

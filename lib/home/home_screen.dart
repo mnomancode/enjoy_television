@@ -1,5 +1,6 @@
 import 'package:enjoy_television/constants/image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'tv_channel_widget.dart';
 import 'widgets/videos_widget.dart';
@@ -10,6 +11,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     context.goNamed('news-read-screen', queryParameters: {
+      //       'id': '1',
+      //       'title': 'News',
+      //       'content': ImagePath.dummyHtml,
+      //       'date': '2024-05-01'
+      //     });
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
       drawer: const Drawer(),
       appBar: AppBar(
         title: Image.asset('assets/icons/logo.png', height: 50),
