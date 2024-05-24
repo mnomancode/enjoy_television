@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:enjoy_television/conectivity/app_conectivity.dart';
+import 'package:enjoy_television/conectivity/payment_check.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +35,47 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+      child: Consumer(builder: (((context, ref, child) {
+        final appConnectivity = ref.watch(connectivityStatusProviders);
+
+        if (appConnectivity == ConnectivityStatus.isDisconnected) {
+          log('Disconnected');
+
+          return const MaterialApp(home: NoInternet());
+        }
+
+        if (appConnectivity == ConnectivityStatus.isConnected) {
+          return const MaterialApp(home: MyApp());
+        }
+        return const MaterialApp(home: NoInternet());
+      }))),
+    ),
+  );
+}
+
+class NoInternet extends StatelessWidget {
+  const NoInternet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('No Internet Connection'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Retry'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends ConsumerWidget {

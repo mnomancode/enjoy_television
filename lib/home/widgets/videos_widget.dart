@@ -124,8 +124,8 @@ class VideosWidget extends ConsumerWidget {
                             ),
                           ),
                           Positioned(
-                              top: 20,
-                              right: 20,
+                              top: 10,
+                              right: 10,
                               child: FavoriteWidget(
                                   YoutubePlayer.convertUrlToId(
                                       data[index].videoUrl)!,

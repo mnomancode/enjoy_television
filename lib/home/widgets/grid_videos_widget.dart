@@ -54,13 +54,6 @@ class GridVideosWidget extends ConsumerWidget {
                           controller!.load(YoutubePlayer.convertUrlToId(
                               data[index].videoUrl)!);
                         }
-
-                        // context.goNamed('play-video', queryParameters: {
-                        //   'title': data[index].title,
-                        //   'pageUrl': data[index].pagePath,
-                        //   'videoUrl': data[index].videoUrl,
-                        //   'date': data[index].date ?? '',
-                        // });
                       },
                       child: Card(
                         color: const Color(0xFF191919),

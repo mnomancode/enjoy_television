@@ -1,10 +1,7 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/utils/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,20 +9,22 @@ part 'data_model.freezed.dart';
 part 'data_model.g.dart';
 
 // @riverpod
-// FutureOr<List<DataModel>> fetchVideos(
-//     DataModelRef ref, String videoPath) async {
+// FutureOr<List<DataModel>> fetchVideos(DataModelRef ref) async {
 //   DioClient dioClient = DioClient();
 //   var response = await dioClient.getVideos('video.php');
 
-//   var jsonData = AppUtils.extractData(response.data);
+//   var jsonData = AppUtils.extractData('', response.data);
+//   ref.keepAlive();
 
-//   return jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
+//   return jsonData!.map<DataModel>((e) => DataModel.fromJson(e)).toList();
 // }
 
 @Riverpod(keepAlive: true)
 class DataModelNotifier extends _$DataModelNotifier {
   @override
-  FutureOr<List<DataModel>> build(String path) async {
+  FutureOr<List<DataModel>> build(
+    String path,
+  ) async {
     return _fetchData(path);
   }
 

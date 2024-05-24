@@ -18,11 +18,13 @@ class VidePlayerScreen extends ConsumerStatefulWidget {
     required this.videoUrl,
     this.isFavorite = false,
     required this.date,
+    required this.imageUrl,
   });
   final String? pageTitle;
   final String phpPath;
   final String? pageUrl;
   final String videoUrl;
+  final String imageUrl;
   final String date;
   final String? title;
   final bool? isFavorite;
@@ -85,7 +87,7 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
                   YoutubePlayer.convertUrlToId(widget.videoUrl)!,
                   DataModel(
                     title: widget.title ?? '',
-                    imageUrl: '',
+                    imageUrl: widget.imageUrl ?? '',
                     videoUrl: widget.videoUrl,
                     pagePath: widget.phpPath,
                     date: widget.date,

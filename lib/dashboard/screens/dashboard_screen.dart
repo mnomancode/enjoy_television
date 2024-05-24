@@ -1,10 +1,14 @@
+import 'package:enjoy_television/conectivity/payment_check.dart';
 import 'package:enjoy_television/dashboard/providers/index_bottom_bar.dart';
 import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import ' favorites_screen.dart';
 import '../../home/home_screen.dart';
+import '../../main.dart';
+import '../../utils/payment_error.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -22,7 +26,25 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomBar = ref.watch(bottomBarNotifierProvider);
     return Scaffold(
-      body: _buildScreens()[bottomBar.currentIndex],
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          _buildScreens()[bottomBar.currentIndex],
+          FutureBuilder(
+            future: ref.watch(paymentStatusNotifierProvider.notifier).build(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.data?.paymentDone ?? true) {
+                  return Container();
+                } else {
+                  return NoPayment(message: snapshot.data?.message);
+                }
+              }
+              return Container();
+            },
+          ),
+        ],
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,

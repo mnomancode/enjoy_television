@@ -30,6 +30,7 @@ final router = GoRouter(
             date: state.uri.queryParameters['date'] ?? '',
             title: state.uri.queryParameters['title'] ?? '',
             isFavorite: state.uri.queryParameters['isFavorite'] == 'true',
+            imageUrl: state.uri.queryParameters['imageUrl'] ?? '',
           )),
         ),
         GoRoute(

@@ -52,40 +52,43 @@ class NewsListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(newsItem.title,
-                            style: Theme.of(context).textTheme.titleMedium),
-                        Row(
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 180,
+                          child: Text(newsItem.title,
+                              style: Theme.of(context).textTheme.titleMedium),
+                        ),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                const Icon(Icons.calendar_today_outlined,
-                                    color: Colors.grey, size: 15),
-                                const SizedBox(width: 5),
-                                Text(newsItem.date?.split('T').first ?? '',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall
-                                        ?.greyColor),
-                              ],
-                            ),
-                            if (newsItem.readTime != null) ...[
-                              const SizedBox(width: 10),
-                              Row(
-                                children: [
-                                  const Icon(Icons.menu_book_outlined,
-                                      size: 15, color: Colors.grey),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    '${newsItem.readTime ?? ''} read',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall
-                                        ?.greyColor,
-                                  ),
-                                ],
-                              ),
-                            ],
+                            // Row(
+                            //   children: [
+                            //     const Icon(Icons.calendar_today_outlined,
+                            //         color: Colors.grey, size: 15),
+                            //     const SizedBox(width: 5),
+                            //     Text(newsItem.date?.split('T').first ?? '',
+                            //         style: Theme.of(context)
+                            //             .textTheme
+                            //             .labelSmall
+                            //             ?.greyColor),
+                            //   ],
+                            // ),
+                            // if (newsItem.readTime != null) ...[
+                            //   const SizedBox(width: 10),
+                            //   Row(
+                            //     children: [
+                            //       const Icon(Icons.menu_book_outlined,
+                            //           size: 15, color: Colors.grey),
+                            //       const SizedBox(width: 5),
+                            //       Text(
+                            //         '${newsItem.readTime ?? ''} read',
+                            //         style: Theme.of(context)
+                            //             .textTheme
+                            //             .labelSmall
+                            //             ?.greyColor,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ],
                           ],
                         ),
                       ],
@@ -100,11 +103,6 @@ class NewsListItem extends StatelessWidget {
             top: 20,
             right: 20,
             child: FavoriteWidget(newsItem.id, null, newsItem)),
-        // const Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: Icon(Icons.favorite_border_outlined, size: 30),
-        // )
       ],
     );
   }

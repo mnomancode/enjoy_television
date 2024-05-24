@@ -26,7 +26,8 @@ class VideosListItem extends StatelessWidget {
             'videoUrl': dataModel.videoUrl,
             'date': dataModel.date ?? '',
             'phpPath': 'path',
-            'isFavorite': 'true'
+            'isFavorite': 'true',
+            'imageUrl': dataModel.imageUrl,
           }),
           child: Card(
             margin: const EdgeInsets.all(10),
@@ -56,27 +57,30 @@ class VideosListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(dataModel.title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(Icons.calendar_today_outlined,
-                                    color: Colors.grey, size: 15),
-                                const SizedBox(width: 5),
-                                Text(dataModel.date?.split('T').first ?? '',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall
-                                        ?.greyColor),
-                              ],
-                            ),
-                          ],
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 220,
+                          child: Text(dataModel.title,
+                              style: Theme.of(context).textTheme.titleMedium,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis),
                         ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Row(
+                        //       children: [
+                        //         const Icon(Icons.calendar_today_outlined,
+                        //             color: Colors.grey, size: 15),
+                        //         const SizedBox(width: 5),
+                        //         Text(dataModel.date?.split('T').first ?? '',
+                        //             style: Theme.of(context)
+                        //                 .textTheme
+                        //                 .labelSmall
+                        //                 ?.greyColor),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
@@ -87,11 +91,6 @@ class VideosListItem extends StatelessWidget {
         ),
         Positioned(
             top: 20, right: 20, child: FavoriteWidget(itemId, dataModel, null)),
-        // const Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: Icon(Icons.favorite_border_outlined, size: 30),
-        // )
       ],
     );
   }

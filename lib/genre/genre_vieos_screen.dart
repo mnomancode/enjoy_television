@@ -75,6 +75,7 @@ class GenreVideosScreen extends ConsumerWidget {
                               'videoUrl': videos[index].videoUrl,
                               'date': videos[index].date ?? '',
                               'phpPath': genre.phpPath,
+                              'imageUrl': videos[index].imageUrl,
                             });
                           },
                           child: Padding(

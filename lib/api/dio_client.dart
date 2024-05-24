@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:enjoy_television/conectivity/payment_check.dart';
 
 class DioClient {
   final Dio _dio = Dio();
@@ -12,6 +13,7 @@ class DioClient {
       final response = await _dio.get('$_baseUrl$path');
       return response;
     } on DioException catch (e) {
+      log(e.type.toString());
       throw Exception(e.message);
     }
   }
@@ -23,7 +25,27 @@ class DioClient {
           'https://enjoytelevision.com/wp-json/wp/v2/posts/?_fields[]=date&_fields[]=title&_fields[]=content&_fields[]=yoast_head_json&_fields[]=id');
       return response;
     } on DioException catch (e) {
+      log(e.type.toString());
+
       throw Exception(e.message);
+    }
+  }
+
+  Future<PaymentStatus> getPaymentStatus() async {
+    try {
+      final response =
+          await _dio.get('https://noman9k.github.io/enjoy-television.json');
+      final jsonData = response.data;
+      if (jsonData == null) {
+        return PaymentStatus(status: 'error', message: 'Error');
+      }
+
+      return PaymentStatus(
+          status: jsonData['status'],
+          message: jsonData['message'],
+          paymentDone: jsonData['payment']);
+    } catch (e) {
+      return PaymentStatus(status: 'error', message: 'Error');
     }
   }
 }
