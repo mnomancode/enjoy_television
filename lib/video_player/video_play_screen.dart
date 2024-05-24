@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:enjoy_television/common/favourite_widget.dart';
+import 'package:enjoy_television/models/data_model.dart';
 import 'package:enjoy_television/video_player/new_youtube_player.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -11,20 +9,23 @@ import '../home/widgets/grid_videos_widget.dart';
 import 'video_player_provider.dart';
 
 class VidePlayerScreen extends ConsumerStatefulWidget {
-  const VidePlayerScreen(
-      {super.key,
-      required this.pageTitle,
-      required this.phpPath,
-      this.pageUrl,
-      this.title,
-      required this.videoUrl,
-      required this.date});
+  const VidePlayerScreen({
+    super.key,
+    required this.pageTitle,
+    required this.phpPath,
+    this.pageUrl,
+    this.title,
+    required this.videoUrl,
+    this.isFavorite = false,
+    required this.date,
+  });
   final String? pageTitle;
   final String phpPath;
   final String? pageUrl;
   final String videoUrl;
   final String date;
   final String? title;
+  final bool? isFavorite;
 
   @override
   ConsumerState<VidePlayerScreen> createState() => _VidePlayerScreenState();
@@ -79,22 +80,30 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
                   maxLines: 3,
                 ),
               ),
-              Spacer(),
-              IconButton(
-                icon: const Icon(Icons.favorite_border_sharp),
-                onPressed: () {},
-              ),
-              SizedBox(width: 10),
+              const Spacer(),
+              FavoriteWidget(
+                  YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+                  DataModel(
+                    title: widget.title ?? '',
+                    imageUrl: '',
+                    videoUrl: widget.videoUrl,
+                    pagePath: widget.phpPath,
+                    date: widget.date,
+                  ),
+                  null),
+              const SizedBox(width: 10),
               IconButton(
                 icon: const Icon(Icons.share),
                 onPressed: () {},
               ),
             ],
           ),
-          child: GridVideosWidget(
-              controller: _controller,
-              path: widget.phpPath,
-              title: 'Continue Watching'),
+          child: widget.isFavorite!
+              ? const SizedBox()
+              : GridVideosWidget(
+                  controller: _controller,
+                  path: widget.phpPath,
+                  title: 'Continue Watching'),
         ),
       );
     });

@@ -29,6 +29,7 @@ final router = GoRouter(
             videoUrl: state.uri.queryParameters['videoUrl'] ?? '',
             date: state.uri.queryParameters['date'] ?? '',
             title: state.uri.queryParameters['title'] ?? '',
+            isFavorite: state.uri.queryParameters['isFavorite'] == 'true',
           )),
         ),
         GoRoute(

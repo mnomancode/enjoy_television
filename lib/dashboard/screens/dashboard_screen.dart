@@ -3,6 +3,7 @@ import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import ' favorites_screen.dart';
 import '../../home/home_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
@@ -12,7 +13,7 @@ class DashboardScreen extends ConsumerWidget {
     return const [
       HomeScreen(),
       GenreScreen(),
-      Center(child: Text('Favorite')),
+      FavoritesScreen(),
       Center(child: Text('Updates')),
     ];
   }

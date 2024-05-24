@@ -5,7 +5,7 @@ import '../api/dio_client.dart';
 
 part 'news_provider.g.dart';
 
-// @Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true)
 class NewsNotifier extends _$NewsNotifier {
   @override
   FutureOr<List<News>> build() async {

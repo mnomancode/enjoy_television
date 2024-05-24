@@ -6,8 +6,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "**/*.freezed.dart": true,
-        "**/*.g.dart": true
+        // "**/*.freezed.dart": true,
+        // "**/*.g.dart": true
     },
     "hide-files.files": [],
     "cSpell.words": [
