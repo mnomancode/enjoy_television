@@ -25,7 +25,7 @@ class VideosListItem extends StatelessWidget {
             'pageUrl': dataModel.pagePath,
             'videoUrl': dataModel.videoUrl,
             'date': dataModel.date ?? '',
-            'phpPath': 'path',
+            'phpPath': dataModel.pagePath,
             'isFavorite': 'true',
             'imageUrl': dataModel.imageUrl,
           }),

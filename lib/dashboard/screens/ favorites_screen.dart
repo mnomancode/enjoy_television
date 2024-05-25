@@ -1,5 +1,6 @@
 import 'package:enjoy_television/database/repository/favorites_impl.dart';
 import 'package:enjoy_television/common/news_list_item.dart';
+import 'package:enjoy_television/loading_widgets/news_list_loading.dart';
 import 'package:enjoy_television/news/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,7 +30,7 @@ class FavoritesScreen extends ConsumerWidget {
           stream: favoriteRepository.watchFavorite(),
           builder: (context, AsyncSnapshot<List<Favorite>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const NewsListViewLoading();
             }
 
             if (snapshot.hasError) {

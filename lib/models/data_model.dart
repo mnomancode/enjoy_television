@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:enjoy_television/api/dio_client.dart';
@@ -38,6 +39,13 @@ class DataModelNotifier extends _$DataModelNotifier {
       log('jsonData is null');
       return [];
     }
+
+    List<DataModel> data =
+        jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
+
+    data.forEach((element) {
+      log('path $path ${element.pagePath}');
+    });
 
     return jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
   }

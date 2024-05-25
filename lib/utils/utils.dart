@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:enjoy_television/extensions/string_extension.dart';
 import 'package:html/parser.dart';
 
@@ -73,12 +75,14 @@ class AppUtils {
           ?.querySelector('a')
           ?.attributes['href'];
 
+      log('postLink $postLink');
+
       extractedData.add({
         'videoUrl': aHref.toString(),
         'imageUrl': imagePath!.matchRegExp(r"url\('([^']*)'\)"),
         'title': h2Text.toString(),
         'date': date,
-        'postLink': postLink,
+        'pagePath': postLink,
       });
     }
 

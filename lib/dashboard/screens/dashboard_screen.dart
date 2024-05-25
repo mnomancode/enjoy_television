@@ -1,14 +1,13 @@
-import 'package:enjoy_television/conectivity/payment_check.dart';
+import 'package:enjoy_television/connectivity/payment_check.dart';
 import 'package:enjoy_television/dashboard/providers/index_bottom_bar.dart';
 import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import ' favorites_screen.dart';
 import '../../home/home_screen.dart';
-import '../../main.dart';
 import '../../utils/payment_error.dart';
+import 'updates_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -18,7 +17,7 @@ class DashboardScreen extends ConsumerWidget {
       HomeScreen(),
       GenreScreen(),
       FavoritesScreen(),
-      Center(child: Text('Updates')),
+      UpdatesScreen(),
     ];
   }
 

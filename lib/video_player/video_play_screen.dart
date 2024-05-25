@@ -3,6 +3,7 @@ import 'package:enjoy_television/models/data_model.dart';
 import 'package:enjoy_television/video_player/new_youtube_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../home/widgets/grid_videos_widget.dart';
@@ -87,7 +88,7 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
                   YoutubePlayer.convertUrlToId(widget.videoUrl)!,
                   DataModel(
                     title: widget.title ?? '',
-                    imageUrl: widget.imageUrl ?? '',
+                    imageUrl: widget.imageUrl,
                     videoUrl: widget.videoUrl,
                     pagePath: widget.phpPath,
                     date: widget.date,
@@ -96,7 +97,11 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
               const SizedBox(width: 10),
               IconButton(
                 icon: const Icon(Icons.share),
-                onPressed: () {},
+                onPressed: () {
+                  Share.share(
+                    'I watched this video on enjoytelevision.com app. Do check it out: ${videProvider?.title ?? widget.title ?? ''}\n${videProvider?.title ?? widget.videoUrl}',
+                  );
+                },
               ),
             ],
           ),

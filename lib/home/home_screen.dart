@@ -1,7 +1,7 @@
 import 'package:enjoy_television/constants/image_path.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
+import '../common/drawer/drawer_widget.dart';
 import 'tv_channel_widget.dart';
 import 'widgets/videos_widget.dart';
 
@@ -11,18 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     context.goNamed('news-read-screen', queryParameters: {
-      //       'id': '1',
-      //       'title': 'News',
-      //       'content': ImagePath.dummyHtml,
-      //       'date': '2024-05-01'
-      //     });
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
-      drawer: const Drawer(),
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         title: Image.asset('assets/icons/logo.png', height: 50),
         actions: [
@@ -37,8 +26,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             const TvChannelWidget(),
 
-            ...ImagePath.genreList.map(
-                (genre) => VideosWidget(path: genre.phpPath, title: genre.name))
+            ...ImagePath.genreList.map((genre) {
+              if (genre.name == 'News') {
+                return const Text('News');
+              }
+
+              return VideosWidget(path: genre.phpPath, title: genre.name);
+            })
             // ImagePath.genreList.map(genre)=> VideosWidget(path:genre.path)).toList(),
             // VideosWidget(path: 'mob_festivals.php', title: 'Festivals & Clubs'),
             // VideosWidget(path: 'djset.php', title: 'DJset'),

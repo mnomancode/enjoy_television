@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common/drawer/drawer_widget.dart';
 import '../constants/image_path.dart';
 
 class GenreScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class GenreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         title: Text('Genre',
             style:

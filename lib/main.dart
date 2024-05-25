@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:enjoy_television/conectivity/app_conectivity.dart';
-import 'package:enjoy_television/conectivity/payment_check.dart';
+import 'package:enjoy_television/connectivity/app_conectivity.dart';
+import 'package:enjoy_television/connectivity/payment_check.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,6 +55,24 @@ Future<void> main() async {
   );
 }
 
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(themeNotifierProvider);
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Enjoy Television',
+      themeMode: theme.mode,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      routerConfig: router,
+    );
+  }
+}
+
 class NoInternet extends StatelessWidget {
   const NoInternet({super.key});
 
@@ -78,23 +96,6 @@ class NoInternet extends StatelessWidget {
   }
 }
 
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeNotifierProvider);
-
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Enjoy Television',
-      themeMode: theme.mode,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      routerConfig: router,
-    );
-  }
-}
 
 
 // https://enjoytelevision.com/wp-json/wp/v2/posts/?_fields[]=author&_fields[]=id&_fields[]=title&_fields[]=link&_fields[]=content

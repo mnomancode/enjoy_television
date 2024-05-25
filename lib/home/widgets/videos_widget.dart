@@ -55,6 +55,7 @@ class VideosWidget extends ConsumerWidget {
                           'videoUrl': data[index].videoUrl,
                           'date': data[index].date ?? '',
                           'phpPath': path,
+                          'imageUrl': data[index].imageUrl,
                         });
                       },
                       child: Stack(

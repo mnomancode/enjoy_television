@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:enjoy_television/conectivity/payment_check.dart';
+import 'package:enjoy_television/connectivity/payment_check.dart';
 
 class DioClient {
   final Dio _dio = Dio();
