@@ -4,7 +4,7 @@ import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import ' favorites_screen.dart';
+import 'favorites_screen.dart';
 import '../../home/home_screen.dart';
 import '../../utils/payment_error.dart';
 import 'updates_screen.dart';

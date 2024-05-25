@@ -25,6 +25,7 @@ mixin _$DataModel {
   String get videoUrl => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
   String? get pagePath => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $DataModelCopyWith<$Res> {
       String imageUrl,
       String videoUrl,
       String? date,
-      String? pagePath});
+      String? pagePath,
+      String? category});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
     Object? videoUrl = null,
     Object? date = freezed,
     Object? pagePath = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -85,6 +88,10 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
           ? _value.pagePath
           : pagePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +109,8 @@ abstract class _$$DataModelImplCopyWith<$Res>
       String imageUrl,
       String videoUrl,
       String? date,
-      String? pagePath});
+      String? pagePath,
+      String? category});
 }
 
 /// @nodoc
@@ -121,6 +129,7 @@ class __$$DataModelImplCopyWithImpl<$Res>
     Object? videoUrl = null,
     Object? date = freezed,
     Object? pagePath = freezed,
+    Object? category = freezed,
   }) {
     return _then(_$DataModelImpl(
       title: null == title
@@ -143,6 +152,10 @@ class __$$DataModelImplCopyWithImpl<$Res>
           ? _value.pagePath
           : pagePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -155,7 +168,8 @@ class _$DataModelImpl implements _DataModel {
       required this.imageUrl,
       required this.videoUrl,
       this.date,
-      this.pagePath});
+      this.pagePath,
+      this.category});
 
   factory _$DataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataModelImplFromJson(json);
@@ -170,10 +184,12 @@ class _$DataModelImpl implements _DataModel {
   final String? date;
   @override
   final String? pagePath;
+  @override
+  final String? category;
 
   @override
   String toString() {
-    return 'DataModel(title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, date: $date, pagePath: $pagePath)';
+    return 'DataModel(title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, date: $date, pagePath: $pagePath, category: $category)';
   }
 
   @override
@@ -188,13 +204,15 @@ class _$DataModelImpl implements _DataModel {
                 other.videoUrl == videoUrl) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.pagePath, pagePath) ||
-                other.pagePath == pagePath));
+                other.pagePath == pagePath) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, imageUrl, videoUrl, date, pagePath);
+  int get hashCode => Object.hash(
+      runtimeType, title, imageUrl, videoUrl, date, pagePath, category);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +234,8 @@ abstract class _DataModel implements DataModel {
       required final String imageUrl,
       required final String videoUrl,
       final String? date,
-      final String? pagePath}) = _$DataModelImpl;
+      final String? pagePath,
+      final String? category}) = _$DataModelImpl;
 
   factory _DataModel.fromJson(Map<String, dynamic> json) =
       _$DataModelImpl.fromJson;
@@ -231,6 +250,8 @@ abstract class _DataModel implements DataModel {
   String? get date;
   @override
   String? get pagePath;
+  @override
+  String? get category;
   @override
   @JsonKey(ignore: true)
   _$$DataModelImplCopyWith<_$DataModelImpl> get copyWith =>

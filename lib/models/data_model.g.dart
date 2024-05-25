@@ -13,6 +13,7 @@ _$DataModelImpl _$$DataModelImplFromJson(Map<String, dynamic> json) =>
       videoUrl: json['videoUrl'] as String,
       date: json['date'] as String?,
       pagePath: json['pagePath'] as String?,
+      category: json['category'] as String?,
     );
 
 Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
       'videoUrl': instance.videoUrl,
       'date': instance.date,
       'pagePath': instance.pagePath,
+      'category': instance.category,
     };
 
 // **************************************************************************

@@ -5,6 +5,7 @@ import 'package:enjoy_television/news/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/tv_app_bar.dart';
 import '../../common/videos_list_item.dart';
 import '../../database/database_impl.dart';
 import '../../models/data_model.dart';
@@ -18,14 +19,7 @@ class FavoritesScreen extends ConsumerWidget {
         ref.watch(favoriteRepositoryImplProvider.notifier);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Favorites',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontSize: 24)),
-          centerTitle: true,
-        ),
+        appBar: const TVAppBar(),
         body: StreamBuilder(
           stream: favoriteRepository.watchFavorite(),
           builder: (context, AsyncSnapshot<List<Favorite>> snapshot) {

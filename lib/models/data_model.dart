@@ -40,13 +40,6 @@ class DataModelNotifier extends _$DataModelNotifier {
       return [];
     }
 
-    List<DataModel> data =
-        jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
-
-    data.forEach((element) {
-      log('path $path ${element.pagePath}');
-    });
-
     return jsonData.map<DataModel>((e) => DataModel.fromJson(e)).toList();
   }
 }
@@ -66,6 +59,7 @@ class DataModel with _$DataModel {
     required String videoUrl,
     String? date,
     String? pagePath,
+    String? category,
   }) = _DataModel;
 
   factory DataModel.fromJson(Map<String, dynamic> json) =>

@@ -20,7 +20,7 @@ class VideosListItem extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () => context.goNamed('play-video', queryParameters: {
-            'pageTitle': 'Favorites',
+            'pageTitle': 'Favourite',
             'title': dataModel.title,
             'pageUrl': dataModel.pagePath,
             'videoUrl': dataModel.videoUrl,
@@ -37,6 +37,8 @@ class VideosListItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -64,6 +66,7 @@ class VideosListItem extends StatelessWidget {
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis),
                         ),
+                        const SizedBox()
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //   children: [

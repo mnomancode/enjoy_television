@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common/drawer/drawer_widget.dart';
+import '../common/tv_app_bar.dart';
 import '../constants/image_path.dart';
 
 class GenreScreen extends StatelessWidget {
@@ -11,12 +12,7 @@ class GenreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: AppBar(
-        title: Text('Genre',
-            style:
-                Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 24)),
-        centerTitle: true,
-      ),
+      appBar: const TVAppBar(),
       body: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           separatorBuilder: (context, index) => const SizedBox(height: 16),

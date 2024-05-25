@@ -9,8 +9,8 @@ class AppUtils {
       case 'djset.php' || 'festivals.php':
         return _getDataFromHtmlDjset(data);
 
-      case 'video.php':
-        return _getVideosData(data);
+      // case 'video.php':
+      //   return _getVideosData(data);
 
       default:
         return _getDataFromHtmlDjset(data);
@@ -75,7 +75,12 @@ class AppUtils {
           ?.querySelector('a')
           ?.attributes['href'];
 
-      log('postLink $postLink');
+      var category =
+          item.nextElementSibling?.nextElementSibling?.nextElementSibling?.text;
+
+      log('category $category');
+
+      // log('postLink $postLink');
 
       extractedData.add({
         'videoUrl': aHref.toString(),
@@ -83,6 +88,7 @@ class AppUtils {
         'title': h2Text.toString(),
         'date': date,
         'pagePath': postLink,
+        'category': category,
       });
     }
 

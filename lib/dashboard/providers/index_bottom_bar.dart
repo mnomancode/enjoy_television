@@ -31,7 +31,7 @@ class BottomBarNotifier extends _$BottomBarNotifier {
             selectedIcon: Icon(CupertinoIcons.heart_fill,
                 color: Colors.red.withOpacity(0.7)),
             unselectedIcon: const Icon(CupertinoIcons.heart),
-            label: 'Favorite',
+            label: 'Favourite',
           ),
           MyNavItem(
             index: 3,

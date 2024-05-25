@@ -7,7 +7,7 @@ part of 'payment_check.dart';
 // **************************************************************************
 
 String _$paymentStatusNotifierHash() =>
-    r'4695113164c2df1c13dda656deb112526a1ebc76';
+    r'84f915848e5d4220b423114e54e18615aedbfecb';
 
 /// See also [PaymentStatusNotifier].
 @ProviderFor(PaymentStatusNotifier)

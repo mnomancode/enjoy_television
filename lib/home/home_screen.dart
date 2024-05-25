@@ -2,6 +2,7 @@ import 'package:enjoy_television/constants/image_path.dart';
 import 'package:flutter/material.dart';
 
 import '../common/drawer/drawer_widget.dart';
+import '../common/tv_app_bar.dart';
 import 'tv_channel_widget.dart';
 import 'widgets/videos_widget.dart';
 
@@ -12,15 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: AppBar(
-        title: Image.asset('assets/icons/logo.png', height: 50),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: const TVAppBar(showSearch: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
