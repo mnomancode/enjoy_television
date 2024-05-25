@@ -47,6 +47,12 @@ class DashboardScreen extends ConsumerWidget {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
+          border: Border(
+            top: BorderSide(
+              color: Theme.of(context).dividerColor,
+              width: 1,
+            ),
+          ),
           boxShadow: [
             BoxShadow(
                 color: Theme.of(context).shadowColor.withOpacity(0.5),

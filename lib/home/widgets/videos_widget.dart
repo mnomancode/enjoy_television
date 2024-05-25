@@ -31,8 +31,7 @@ class VideosWidget extends ConsumerWidget {
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-              title:
-                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+              title: Text(title, style: Theme.of(context).textTheme.titleLarge),
               trailing: const Icon(Icons.arrow_forward_ios_sharp),
               minVerticalPadding: 0,
             ),
@@ -129,7 +128,8 @@ class VideosWidget extends ConsumerWidget {
                               right: 10,
                               child: FavoriteWidget(
                                   YoutubePlayer.convertUrlToId(
-                                      data[index].videoUrl)!,
+                                          data[index].videoUrl) ??
+                                      '',
                                   data[index],
                                   null)),
                         ],

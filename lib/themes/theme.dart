@@ -91,6 +91,7 @@ extension InvertColor on TextStyle {
 
 /// Defines the `darkTheme` for the application.
 final ThemeData darkTheme = ThemeData(
+    fontFamily: 'OpenSans',
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
       primary: Colors.deepPurple,
@@ -125,7 +126,7 @@ final ThemeData darkTheme = ThemeData(
       labelLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
       labelMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
       labelSmall: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+      titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
     ));
 
 /// Defines the `lightTheme` for the application.

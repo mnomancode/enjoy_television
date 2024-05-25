@@ -9,6 +9,7 @@ import '../../models/data_model.dart';
 
 class UpdatesScreen extends ConsumerWidget {
   const UpdatesScreen({super.key});
+  final bool threeItems = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,9 +20,9 @@ class UpdatesScreen extends ConsumerWidget {
         body: data.when(
           data: (data) {
             return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: threeItems ? 3 : 2,
+                childAspectRatio: threeItems ? 0.55 : 0.75,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,
               ),
@@ -61,28 +62,34 @@ class UpdatesScreen extends ConsumerWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              const SizedBox(height: 6),
+                              SizedBox(height: threeItems ? 2 : 6),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(data[index].title,
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
+                                    style: threeItems
+                                        ? Theme.of(context).textTheme.titleSmall
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis),
                               ),
                               const Spacer(),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: threeItems ? 2 : 8),
                                 child: Text(
                                     (data[index].category)?.toUpperCase() ?? '',
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelSmall
-                                        ?.copyWith(color: Colors.blue)),
+                                        ?.copyWith(
+                                          color: Colors.blue,
+                                          fontSize: threeItems ? 10 : null,
+                                        )),
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: threeItems ? 4 : 8),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -90,11 +97,14 @@ class UpdatesScreen extends ConsumerWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelSmall
-                                          ?.greyColor),
-                                  const SizedBox(width: 10),
+                                          ?.greyColor
+                                          .copyWith(
+                                            fontSize: threeItems ? 9 : null,
+                                          )),
+                                  SizedBox(width: threeItems ? 7 : 10),
                                 ],
                               ),
-                              const SizedBox(height: 28),
+                              SizedBox(height: threeItems ? 22 : 28),
                             ],
                           ),
                         ),
@@ -104,7 +114,7 @@ class UpdatesScreen extends ConsumerWidget {
                           left: 0,
                           child: Container(
                             alignment: Alignment.center,
-                            height: 25,
+                            height: threeItems ? 18 : 25,
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               color: Colors.blue,
@@ -117,7 +127,9 @@ class UpdatesScreen extends ConsumerWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelSmall
-                                    ?.copyWith(color: Colors.white)),
+                                    ?.copyWith(
+                                        color: Colors.white,
+                                        fontSize: threeItems ? 10 : null)),
                           ),
                         )
                       ],
