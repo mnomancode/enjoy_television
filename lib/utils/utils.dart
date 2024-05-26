@@ -1,7 +1,11 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:enjoy_television/extensions/string_extension.dart';
+import 'package:enjoy_television/models/data_model.dart';
 import 'package:html/parser.dart';
+
+import '../search/repository/search_impl.dart';
 
 class AppUtils {
   static List<Map<String, dynamic>>? extractData(String path, data) {
@@ -112,5 +116,44 @@ class AppUtils {
     }
 
     return extractedData;
+  }
+
+  static SearchResult? parseSearchResult(html) {
+    var document = parse(html);
+
+// get element by id
+    var itemsListBox = document.getElementById('proradio-loop');
+    List items = itemsListBox?.children.toList() ?? [];
+    List<VideoItem> videosList = [];
+
+    if (items.isEmpty) {
+      return null;
+    }
+    items.removeLast();
+    for (var element in items) {
+      var title = element.querySelector('h3')?.text ?? '';
+
+      var postUrl = element.querySelector('a')?.attributes['href'];
+      var date = element.querySelector('a')?.text;
+
+      videosList.add(VideoItem(
+        title: title.toString(),
+        date: date.toString(),
+        postUrl: postUrl.toString(),
+      ));
+    }
+
+    var pageString = document.getElementsByClassName(
+        'proradio-num proradio-btn  proradio-btn__r proradio-card ');
+
+    int totalPages = int.tryParse(pageString.last.text) ?? 1;
+
+    log('totalPages $totalPages');
+
+    return SearchResult(
+        title: 'Search Results',
+        data: videosList,
+        totalPages: totalPages,
+        pageString: '');
   }
 }

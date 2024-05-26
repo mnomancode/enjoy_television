@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:enjoy_television/connectivity/payment_check.dart';
 
@@ -13,22 +11,25 @@ class DioClient {
       final response = await _dio.get('$_baseUrl$path');
       return response;
     } on DioException catch (e) {
-      log(e.type.toString());
       throw Exception(e.message);
     }
   }
 
   Future<Response> getNews() async {
-    log('getNews');
     try {
       final response = await _dio.get(
           'https://enjoytelevision.com/wp-json/wp/v2/posts/?_fields[]=date&_fields[]=title&_fields[]=content&_fields[]=yoast_head_json&_fields[]=id');
       return response;
     } on DioException catch (e) {
-      log(e.type.toString());
-
       throw Exception(e.message);
     }
+  }
+
+  Future<Response> search(String query, int page) async {
+    final htmlResponse = await _dio
+        .get('https://enjoytelevision.com/page/$page/?s=$query&Submit');
+
+    return htmlResponse;
   }
 
   Future<PaymentStatus> getPaymentStatus() async {

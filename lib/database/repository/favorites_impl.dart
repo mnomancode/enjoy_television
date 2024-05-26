@@ -10,6 +10,7 @@ part 'favorites_impl.g.dart';
 @riverpod
 class FavoriteRepositoryImpl extends _$FavoriteRepositoryImpl
     implements FavoriteRepository {
+  // ignore: avoid_public_notifier_properties, avoid_manual_providers_as_generated_provider_dependency
   late final Database database = ref.read(databaseProvider);
 
   @override

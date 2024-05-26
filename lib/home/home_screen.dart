@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: const TVAppBar(showSearch: true),
+      appBar: const TVAppBar(showSearchBtn: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
