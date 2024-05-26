@@ -1,27 +1,22 @@
-import 'dart:developer';
-
 import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_impl.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SearchRepositoryImpl extends _$SearchRepositoryImpl {
   @override
   FutureOr<SearchResult?> build({required String query, int page = 1}) async {
     try {
-      log('Searching for $query');
       DioClient dioClient = DioClient();
       final response = await dioClient.search(query, page);
       if (response.statusCode == 200) {
         return AppUtils.parseSearchResult(response.data);
       } else {
-        log('Failed to search for $query');
         return null;
       }
     } on Exception {
-      log('Failed to search for $query');
       rethrow;
     }
   }

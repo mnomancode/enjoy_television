@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'dart:ffi';
 
+import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/extensions/string_extension.dart';
 import 'package:enjoy_television/models/data_model.dart';
 import 'package:html/parser.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../search/repository/search_impl.dart';
 
@@ -155,5 +157,19 @@ class AppUtils {
         data: videosList,
         totalPages: totalPages,
         pageString: '');
+  }
+
+  Future<String?> getVideoUrl(String postUrl) async {
+    DioClient dioClient = DioClient();
+    final response = await dioClient.getVideoUrl(postUrl);
+    var document = parse(response.data);
+    //
+    var element = document.getElementsByClassName(
+        'proradio-col proradio-s12 proradio-m12 proradio-l9');
+    var videoUrl = element.first.querySelector('iframe')?.attributes['src'];
+    videoUrl = videoUrl?.split('?')[0];
+    log('iD  : ${YoutubePlayer.convertUrlToId(videoUrl!)}');
+
+    return YoutubePlayer.convertUrlToId(videoUrl);
   }
 }

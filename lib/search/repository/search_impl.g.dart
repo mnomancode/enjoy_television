@@ -7,7 +7,7 @@ part of 'search_impl.dart';
 // **************************************************************************
 
 String _$searchRepositoryImplHash() =>
-    r'a56aca41a25f61399d9f2ed2fdbba9788b0f8f40';
+    r'd9701a9625766d472214316b2739f9da659efc72';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,7 +31,7 @@ class _SystemHash {
 }
 
 abstract class _$SearchRepositoryImpl
-    extends BuildlessAutoDisposeAsyncNotifier<SearchResult?> {
+    extends BuildlessAsyncNotifier<SearchResult?> {
   late final String query;
   late final int page;
 
@@ -87,8 +87,8 @@ class SearchRepositoryImplFamily extends Family<AsyncValue<SearchResult?>> {
 }
 
 /// See also [SearchRepositoryImpl].
-class SearchRepositoryImplProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    SearchRepositoryImpl, SearchResult?> {
+class SearchRepositoryImplProvider
+    extends AsyncNotifierProviderImpl<SearchRepositoryImpl, SearchResult?> {
   /// See also [SearchRepositoryImpl].
   SearchRepositoryImplProvider({
     required String query,
@@ -154,7 +154,7 @@ class SearchRepositoryImplProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<SearchRepositoryImpl, SearchResult?>
+  AsyncNotifierProviderElement<SearchRepositoryImpl, SearchResult?>
       createElement() {
     return _SearchRepositoryImplProviderElement(this);
   }
@@ -176,8 +176,7 @@ class SearchRepositoryImplProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 }
 
-mixin SearchRepositoryImplRef
-    on AutoDisposeAsyncNotifierProviderRef<SearchResult?> {
+mixin SearchRepositoryImplRef on AsyncNotifierProviderRef<SearchResult?> {
   /// The parameter `query` of this provider.
   String get query;
 
@@ -186,8 +185,8 @@ mixin SearchRepositoryImplRef
 }
 
 class _SearchRepositoryImplProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<SearchRepositoryImpl,
-        SearchResult?> with SearchRepositoryImplRef {
+    extends AsyncNotifierProviderElement<SearchRepositoryImpl, SearchResult?>
+    with SearchRepositoryImplRef {
   _SearchRepositoryImplProviderElement(super.provider);
 
   @override

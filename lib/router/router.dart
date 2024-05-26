@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../news/news_read_screen.dart';
+import '../search/search_play_video_screen.dart';
 import '../video_player/video_play_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -63,23 +64,21 @@ final router = GoRouter(
                 },
               ),
             ]),
+        GoRoute(
+          name: 'search-play-video-screen',
+          path: 'search-play-video-screen',
+          pageBuilder: (context, state) {
+            var queryParameters = state.uri.queryParameters;
+
+            return MaterialPage(
+                child: SearchPlayVideoScreen(
+              title: queryParameters['title'] ?? '',
+              date: queryParameters['date'] ?? '',
+              postUrl: queryParameters['postUrl'] ?? '',
+            ));
+          },
+        ),
       ],
     ),
-    // GoRoute(
-    //     name: 'play-video',
-    //     path: '/play-video',
-    //     pageBuilder: (context, state) => MaterialPage(
-    //         child: VidePlayerScreen(id: state.uri.queryParameters['id']))
-
-    //     // DialogPage(
-    //     //   builder: (_) => AddCategoryScreen(
-    //     //     id: state.uri.queryParameters['id'],
-    //     //     name: state.uri.queryParameters['name'],
-    //     //     svg: state.uri.queryParameters['svg'],
-    //     //     order: int.tryParse(
-    //     //         state.uri.queryParameters['order'] ?? '0'),
-    //     //   ),
-    //     // ),
-    //     ),
   ],
 );

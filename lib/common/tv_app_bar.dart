@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../search/search_results.dart';
+import '../search/screens/search_delegate.dart';
 
 class TVAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TVAppBar({super.key, this.title, this.showSearchBtn = false});
@@ -25,7 +25,9 @@ class TVAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: const Icon(Icons.search),
                 onPressed: () async {
                   await showSearch(
-                      context: context, delegate: CustomSearchDelegate());
+                    context: context,
+                    delegate: CustomSearchDelegate(),
+                  );
                 },
               ),
             ],
@@ -34,38 +36,4 @@ class TVAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
-}
-
-class CustomSearchDelegate extends SearchDelegate {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return SearchResults(query);
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return const SizedBox();
-  }
 }

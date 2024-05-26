@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class NewYoutubePlayer extends StatefulWidget {
@@ -9,10 +8,12 @@ class NewYoutubePlayer extends StatefulWidget {
       required this.videoUrl,
       this.child,
       required this.titleWidget,
-      required this.controller});
+      required this.controller,
+      this.appBar});
   final String videoUrl;
   final Widget? child;
   final Widget titleWidget;
+  final Widget? appBar;
   final YoutubePlayerController controller;
 
   @override
@@ -74,6 +75,7 @@ class _NewYoutubePlayerState extends State<NewYoutubePlayer> {
               margin: const EdgeInsets.symmetric(horizontal: 7),
               child: Column(
                 children: [
+                  if (widget.appBar != null) widget.appBar!,
                   Hero(
                     tag: widget.videoUrl,
                     child: ClipRRect(

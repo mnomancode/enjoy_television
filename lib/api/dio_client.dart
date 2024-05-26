@@ -32,6 +32,11 @@ class DioClient {
     return htmlResponse;
   }
 
+  Future<Response> getVideoUrl(String postUrl) async {
+    final response = await _dio.get(postUrl);
+    return response;
+  }
+
   Future<PaymentStatus> getPaymentStatus() async {
     try {
       final response =
