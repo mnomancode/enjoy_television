@@ -106,7 +106,9 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
             ],
           ),
           child: widget.isFavorite!
-              ? const SizedBox()
+              ? Center(
+                  child: Image.asset('assets/images/playing_video.png',
+                      width: MediaQuery.of(context).size.width * 0.6))
               : GridVideosWidget(
                   controller: _controller,
                   path: widget.phpPath,

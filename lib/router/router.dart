@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../news/news_read_screen.dart';
 import '../search/search_play_video_screen.dart';
+import '../settings/settings_screen.dart';
 import '../video_player/video_play_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -78,6 +79,11 @@ final router = GoRouter(
             ));
           },
         ),
+        GoRoute(
+            path: 'settings-screen',
+            name: 'settings-screen',
+            pageBuilder: (context, state) =>
+                const MaterialPage(child: SettingsScreen())),
       ],
     ),
   ],

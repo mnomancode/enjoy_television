@@ -106,8 +106,12 @@ class _MyPlayerState extends State<MyPlayer> {
     return NewYoutubePlayer(
       controller: _controller,
       videoUrl: 'https://www.youtube.com/watch?v=${widget.videoId}',
-      appBar: AppBar(
-        title: Text(widget.title ?? ''),
+      appBar: AppBar(title: Text(widget.title ?? '')),
+      bottomWidget: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 50),
+        child: Center(
+            child: Image.asset('assets/images/playing_video.png',
+                width: MediaQuery.of(context).size.width * 0.6)),
       ),
       titleWidget: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

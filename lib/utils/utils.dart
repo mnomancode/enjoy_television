@@ -1,9 +1,5 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/extensions/string_extension.dart';
-import 'package:enjoy_television/models/data_model.dart';
 import 'package:html/parser.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -84,10 +80,6 @@ class AppUtils {
       var category =
           item.nextElementSibling?.nextElementSibling?.nextElementSibling?.text;
 
-      log('category $category');
-
-      // log('postLink $postLink');
-
       extractedData.add({
         'videoUrl': aHref.toString(),
         'imageUrl': imagePath!.matchRegExp(r"url\('([^']*)'\)"),
@@ -150,8 +142,6 @@ class AppUtils {
 
     int totalPages = int.tryParse(pageString.last.text) ?? 1;
 
-    log('totalPages $totalPages');
-
     return SearchResult(
         title: 'Search Results',
         data: videosList,
@@ -168,8 +158,7 @@ class AppUtils {
         'proradio-col proradio-s12 proradio-m12 proradio-l9');
     var videoUrl = element.first.querySelector('iframe')?.attributes['src'];
     videoUrl = videoUrl?.split('?')[0];
-    log('iD  : ${YoutubePlayer.convertUrlToId(videoUrl!)}');
 
-    return YoutubePlayer.convertUrlToId(videoUrl);
+    return YoutubePlayer.convertUrlToId(videoUrl!);
   }
 }

@@ -27,7 +27,7 @@ class VideosWidget extends ConsumerWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 45,
+            height: 43,
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
@@ -39,7 +39,7 @@ class VideosWidget extends ConsumerWidget {
           data.when(
             data: (data) {
               return SizedBox(
-                height: 210,
+                height: 205,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -94,7 +94,7 @@ class VideosWidget extends ConsumerWidget {
                                         const EdgeInsets.fromLTRB(7, 5, 10, 0),
                                     child: Text(
                                       data[index].title,
-                                      maxLines: 3,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context)
                                           .textTheme
@@ -108,7 +108,7 @@ class VideosWidget extends ConsumerWidget {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
-                                              7, 5, 10, 5),
+                                              7, 0, 10, 5),
                                           child: Text(
                                             data[index].date!,
                                             style: Theme.of(context)

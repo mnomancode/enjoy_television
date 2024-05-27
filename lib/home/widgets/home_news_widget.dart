@@ -3,6 +3,7 @@ import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../common/favourite_widget.dart';
 import '../../loading_widgets/app_shimmer.dart';
@@ -100,11 +101,9 @@ class HomeNewsWidget extends ConsumerWidget {
                                           padding: const EdgeInsets.fromLTRB(
                                               7, 5, 10, 5),
                                           child: Text(
-                                            data[index]
-                                                    .date
-                                                    ?.split('T')
-                                                    .first ??
-                                                '',
+                                            DateFormat('dd MMMM yyyy').format(
+                                                DateTime.parse(
+                                                    data[index].date!)),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelSmall

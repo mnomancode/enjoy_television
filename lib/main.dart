@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'notifications/notify_help.dart';
 import 'router/router.dart';
 
 Future<void> main() async {
@@ -34,6 +35,7 @@ Future<void> main() async {
   // )));
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await NotificationHelper().initializeNotification();
 
   runApp(
     ProviderScope(

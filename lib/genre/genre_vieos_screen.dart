@@ -22,7 +22,7 @@ class GenreVideosScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 150.0,
+            expandedHeight: 130.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -30,7 +30,11 @@ class GenreVideosScreen extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleLarge),
               background: Stack(
                 children: [
-                  Image.asset(genre.imagePath, fit: BoxFit.contain),
+                  Image.asset(
+                    genre.imagePath,
+                    fit: BoxFit.fill,
+                    width: double.infinity,
+                  ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(

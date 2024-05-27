@@ -9,11 +9,13 @@ class NewYoutubePlayer extends StatefulWidget {
       this.child,
       required this.titleWidget,
       required this.controller,
-      this.appBar});
+      this.appBar,
+      this.bottomWidget});
   final String videoUrl;
   final Widget? child;
   final Widget titleWidget;
   final Widget? appBar;
+  final Widget? bottomWidget;
   final YoutubePlayerController controller;
 
   @override
@@ -92,6 +94,7 @@ class _NewYoutubePlayerState extends State<NewYoutubePlayer> {
               ),
             ),
             if (widget.child != null) Expanded(child: widget.child!),
+            if (widget.bottomWidget != null) widget.bottomWidget!,
           ],
         );
       },

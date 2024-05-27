@@ -1,5 +1,6 @@
 import 'package:enjoy_television/constants/image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,14 +22,14 @@ class DrawerWidget extends StatelessWidget {
           ),
           const Divider(height: 40),
           ListTile(
-              title: const Text('Share App'),
+              title: const Text('Share App', style: TextStyle(fontSize: 16)),
               leading: const Icon(Icons.share),
               onTap: () {
                 Navigator.of(context).pop();
                 Share.share(ImagePath.shareAppText);
               }),
           ListTile(
-            title: const Text('Feedback'),
+            title: const Text('Feedback', style: TextStyle(fontSize: 16)),
             leading: const Icon(Icons.edit),
             onTap: () {
               Navigator.of(context).pop();
@@ -38,7 +39,7 @@ class DrawerWidget extends StatelessWidget {
             },
           ),
           ListTile(
-              title: const Text('Contact Us'),
+              title: const Text('Contact Us', style: TextStyle(fontSize: 16)),
               leading: const Icon(Icons.email_outlined),
               onTap: () {
                 Navigator.of(context).pop();
@@ -46,15 +47,12 @@ class DrawerWidget extends StatelessWidget {
               }),
           const Divider(height: 40),
           ListTile(
-            title: const Text('Settings'),
-            leading: const Icon(Icons.settings),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('About Us'),
-            leading: const Icon(Icons.info),
-            onTap: () {},
-          ),
+              title: const Text('Settings', style: TextStyle(fontSize: 16)),
+              leading: const Icon(Icons.settings),
+              onTap: () {
+                Navigator.of(context).pop();
+                context.goNamed('settings-screen');
+              }),
         ],
       ),
     );
