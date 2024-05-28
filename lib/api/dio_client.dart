@@ -26,6 +26,7 @@ class DioClient {
   }
 
   Future<Response> search(String query, int page) async {
+    query = query.toLowerCase().trim();
     final htmlResponse = await _dio
         .get('https://enjoytelevision.com/page/$page/?s=$query&Submit');
 

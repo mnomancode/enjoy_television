@@ -61,6 +61,7 @@ final router = GoRouter(
                     title: queryParameters['title'] ?? '',
                     content: queryParameters['content'] ?? '',
                     date: queryParameters['date'] ?? '',
+                    pagePath: queryParameters['pagePath'] ?? '',
                   ));
                 },
               ),

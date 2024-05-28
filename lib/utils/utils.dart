@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:enjoy_television/api/dio_client.dart';
 import 'package:enjoy_television/extensions/string_extension.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/parser.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -101,7 +104,7 @@ class AppUtils {
         'id': item['id'],
         'title': item['title']['rendered'],
         'date': item['date'],
-        'pagePath': item['pagePath'],
+        'pagePath': item['yoast_head_json']['og_url'],
         'htmlContent': item['content']['rendered'],
         'image': item['yoast_head_json']['og_image'][0]['url'],
         'readTime': item['yoast_head_json']['twitter_misc']
@@ -123,6 +126,7 @@ class AppUtils {
     if (items.isEmpty) {
       return null;
     }
+
     items.removeLast();
     for (var element in items) {
       var title = element.querySelector('h3')?.text ?? '';
@@ -136,11 +140,17 @@ class AppUtils {
         postUrl: postUrl.toString(),
       ));
     }
+    int totalPages = 1;
 
-    var pageString = document.getElementsByClassName(
-        'proradio-num proradio-btn  proradio-btn__r proradio-card ');
-
-    int totalPages = int.tryParse(pageString.last.text) ?? 1;
+    try {
+      var pageString = document.getElementsByClassName(
+          'proradio-num proradio-btn  proradio-btn__r proradio-card ');
+      totalPages = int.tryParse(pageString.last.text) ?? 1;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
 
     return SearchResult(
         title: 'Search Results',

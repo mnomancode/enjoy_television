@@ -1,17 +1,8 @@
-import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:enjoy_television/loading_widgets/grid_videos_loading.dart';
 import 'package:enjoy_television/common/news_list_item.dart';
-import 'package:enjoy_television/themes/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../constants/image_path.dart';
-import '../loading_widgets/app_shimmer.dart';
 import '../loading_widgets/news_list_loading.dart';
 import 'news_provider.dart';
 

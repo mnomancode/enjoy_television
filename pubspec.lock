@@ -68,10 +68,11 @@ packages:
   better_player:
     dependency: "direct main"
     description:
-      name: better_player
-      sha256: f2e5d57ea49fb7c4d93838d23846ca5ddf78af6f946e103aeacf2afdd01909b3
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: f6a77cf6fbb515f01aa9fb459b2ee739de3e724c
+      url: "https://github.com/matthewrice345/betterplayer.git"
+    source: git
     version: "0.0.83"
   boolean_selector:
     dependency: transitive
@@ -1494,7 +1495,7 @@ packages:
     source: hosted
     version: "2.4.5"
   webview_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter
       sha256: "392c1d83b70fe2495de3ea2c84531268d5b8de2de3f01086a53334d8b6030a88"

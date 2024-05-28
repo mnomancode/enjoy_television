@@ -44,11 +44,13 @@ class _TvChannelWidgetState extends State<TvChannelWidget> {
 
     BetterPlayerConfiguration betterPlayerConfiguration =
         BetterPlayerConfiguration(
-      placeholder: const Image(image: AssetImage('assets/images/enjoy.png')),
-      controlsConfiguration: controlsConfiguration,
-      aspectRatio: 16 / 9,
-      fit: BoxFit.contain,
-    );
+            placeholder:
+                const Image(image: AssetImage('assets/images/enjoy.png')),
+            controlsConfiguration: controlsConfiguration,
+            aspectRatio: 16 / 9,
+            fit: BoxFit.contain,
+            subtitlesConfiguration:
+                const BetterPlayerSubtitlesConfiguration(fontSize: 16.0));
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
         BetterPlayerDataSourceType.network,
         "https://str27.fluid.stream/EnjoyTelevision/livestream/playlist.m3u8",

@@ -50,6 +50,7 @@ class HomeNewsWidget extends ConsumerWidget {
                         'title': data[index].title,
                         'content': data[index].htmlContent ?? '',
                         'date': data[index].date ?? '',
+                        'pagePath': data[index].pagePath ?? '',
                       }),
                       child: Stack(
                         children: [
