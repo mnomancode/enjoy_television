@@ -46,10 +46,6 @@ class NewsScreen extends ConsumerWidget {
             ),
           ),
           data.when(data: (newsList) {
-            // log('newsList: ${newsList[0].date}');
-            // var date = DateTime.parse('2024-05-02T18:33:08');
-            // var formattedDate = '${date.day}/${date.month}/${date.year}';
-            // log('formattedDate: $formattedDate');
             return SliverList.builder(
               itemBuilder: (context, index) =>
                   NewsListItem(newsItem: newsList[index]),

@@ -4,7 +4,9 @@ import 'package:enjoy_television/loading_widgets/news_list_loading.dart';
 import 'package:enjoy_television/news/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
+import '../../common/drawer/drawer_widget.dart';
 import '../../common/tv_app_bar.dart';
 import '../../common/videos_list_item.dart';
 import '../../database/database_impl.dart';
@@ -19,6 +21,8 @@ class FavoritesScreen extends ConsumerWidget {
         ref.watch(favoriteRepositoryImplProvider.notifier);
 
     return Scaffold(
+        drawerEnableOpenDragGesture: false,
+        drawer: const DrawerWidget(),
         appBar: const TVAppBar(),
         body: StreamBuilder(
           stream: favoriteRepository.watchFavorite(),
@@ -43,11 +47,16 @@ class FavoritesScreen extends ConsumerWidget {
                 bool isNews = favorite.content != null;
                 return isNews
                     ? NewsListItem(
+                        isFavorite: true,
                         newsItem: News(
-                            title: favorite.title,
-                            id: favorite.itemId,
-                            image: favorite.imageUrl,
-                            htmlContent: favorite.content))
+                          title: favorite.title,
+                          id: favorite.itemId,
+                          image: favorite.imageUrl,
+                          htmlContent: favorite.content,
+                          pagePath: favorite.pagePath,
+                          // date: DateFormat('dd MMMM yyyy')
+                          //     .format(favorite.date ?? DateTime.now()),
+                        ))
                     : VideosListItem(
                         itemId: favorite.itemId,
                         dataModel: DataModel(
@@ -55,6 +64,8 @@ class FavoritesScreen extends ConsumerWidget {
                           imageUrl: favorite.imageUrl!,
                           videoUrl: favorite.videoUrl!,
                           pagePath: favorite.pagePath,
+                          // date: DateFormat('dd MMMM yyyy')
+                          //     .format(favorite.date ?? DateTime.now()),
                         ),
                       );
               },

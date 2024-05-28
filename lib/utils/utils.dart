@@ -107,8 +107,9 @@ class AppUtils {
         'pagePath': item['yoast_head_json']['og_url'],
         'htmlContent': item['content']['rendered'],
         'image': item['yoast_head_json']['og_image'][0]['url'],
-        'readTime': item['yoast_head_json']['twitter_misc']
-            ['Est. reading time'],
+        'readTime': item['yoast_head_json']['twitter_misc']['Est. reading time']
+            .toString()
+            .split('')[0],
       });
     }
 

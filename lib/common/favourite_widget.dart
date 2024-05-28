@@ -4,6 +4,7 @@ import 'package:enjoy_television/loading_widgets/app_shimmer.dart';
 import 'package:enjoy_television/news/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../database/repository/favorites_impl.dart';
@@ -59,17 +60,20 @@ class _FavoriteWidgetState extends ConsumerState<FavoriteWidget> {
                       textColor: Theme.of(context).primaryColor,
                       onPressed: () async {
                         await favoriteRepository.addFavorite(
-                          itemId: id,
-                          title:
-                              widget.dataModel?.title ?? widget.newsItem!.title,
-                          imageUrl: widget.dataModel?.imageUrl ??
-                              widget.newsItem!.image,
-                          videoUrl: widget.dataModel?.videoUrl,
-                          content: widget.newsItem?.htmlContent,
-                          pagePath: widget.dataModel?.pagePath ??
-                              widget.newsItem?.pagePath,
-                          date: DateTime.now(),
-                        );
+                            itemId: id,
+                            title: widget.dataModel?.title ??
+                                widget.newsItem!.title,
+                            imageUrl: widget.dataModel?.imageUrl ??
+                                widget.newsItem!.image,
+                            videoUrl: widget.dataModel?.videoUrl,
+                            content: widget.newsItem?.htmlContent,
+                            pagePath: widget.dataModel?.pagePath ??
+                                widget.newsItem?.pagePath,
+                            date: DateFormat('dd MMMM yyyy')
+                                    .tryParse(widget.dataModel?.date ?? '') ??
+                                DateTime.tryParse(
+                                    widget.newsItem?.date ?? '') ??
+                                DateTime.now());
                         setState(() {});
                       },
                     ),

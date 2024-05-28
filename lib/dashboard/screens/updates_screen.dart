@@ -19,6 +19,7 @@ class UpdatesScreen extends ConsumerWidget {
     final newsData = ref.watch(newsNotifierProvider);
 
     return Scaffold(
+      drawerEnableOpenDragGesture: false,
       appBar: const TVAppBar(),
       drawer: const DrawerWidget(),
       body: SingleChildScrollView(

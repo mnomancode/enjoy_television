@@ -1,16 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enjoy_television/news/news_provider.dart';
+import 'package:enjoy_television/themes/theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import 'favourite_widget.dart';
 
 import '../loading_widgets/app_shimmer.dart';
 
 class NewsListItem extends StatelessWidget {
-  const NewsListItem({super.key, required this.newsItem});
+  const NewsListItem(
+      {super.key, required this.newsItem, this.isFavorite = false});
   final News newsItem;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -58,38 +62,64 @@ class NewsListItem extends StatelessWidget {
                           child: Text(newsItem.title,
                               style: Theme.of(context).textTheme.titleMedium),
                         ),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Row(
-                            //   children: [
-                            //     const Icon(Icons.calendar_today_outlined,
-                            //         color: Colors.grey, size: 15),
-                            //     const SizedBox(width: 5),
-                            //     Text(newsItem.date?.split('T').first ?? '',
-                            //         style: Theme.of(context)
-                            //             .textTheme
-                            //             .labelSmall
-                            //             ?.greyColor),
-                            //   ],
-                            // ),
-                            // if (newsItem.readTime != null) ...[
-                            //   const SizedBox(width: 10),
-                            //   Row(
-                            //     children: [
-                            //       const Icon(Icons.menu_book_outlined,
-                            //           size: 15, color: Colors.grey),
-                            //       const SizedBox(width: 5),
-                            //       Text(
-                            //         '${newsItem.readTime ?? ''} read',
-                            //         style: Theme.of(context)
-                            //             .textTheme
-                            //             .labelSmall
-                            //             ?.greyColor,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ],
+                            (isFavorite)
+                                ? const SizedBox()
+                                : Row(
+                                    children: [
+                                      const Icon(Icons.calendar_today_outlined,
+                                          color: Colors.grey, size: 15),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        DateFormat('dd MMMM yyyy').format(
+                                            DateTime.tryParse(
+                                                    newsItem.date ?? '') ??
+                                                DateTime.now()),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall
+                                            ?.greyColor,
+                                      ),
+                                    ],
+                                  ),
+                            (isFavorite)
+                                ? const SizedBox()
+                                : Row(
+                                    children: [
+                                      const Icon(Icons.calendar_today_outlined,
+                                          color: Colors.grey, size: 15),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        DateFormat('dd MMMM yyyy').format(
+                                            DateTime.tryParse(
+                                                    newsItem.date ?? '') ??
+                                                DateTime.now()),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall
+                                            ?.greyColor,
+                                      ),
+                                    ],
+                                  ),
+                            if (newsItem.readTime != null) ...[
+                              const SizedBox(width: 10),
+                              Row(
+                                children: [
+                                  const Icon(Icons.menu_book_outlined,
+                                      size: 15, color: Colors.grey),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    '${newsItem.readTime ?? ''}min read',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.greyColor,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ],
                         ),
                       ],

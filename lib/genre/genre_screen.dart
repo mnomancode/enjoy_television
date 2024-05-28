@@ -12,6 +12,7 @@ class GenreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
+      drawerEnableOpenDragGesture: false,
       appBar: const TVAppBar(),
       body: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),

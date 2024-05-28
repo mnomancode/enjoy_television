@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:enjoy_television/constants/image_path.dart';
 import 'package:enjoy_television/home/widgets/home_news_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../common/drawer/drawer_widget.dart';
 import '../common/tv_app_bar.dart';
@@ -15,23 +16,77 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const DrawerWidget(),
-      appBar: const TVAppBar(showSearchBtn: true),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Platform.isIOS ? const TvChannelWidget() : const NewTVWidget(),
-            ...ImagePath.genreList.map((genre) {
-              if (genre.name == 'News') {
-                return const HomeNewsWidget();
-              }
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        bool isFullScreen = orientation == Orientation.landscape;
 
-              return VideosWidget(path: genre.phpPath, title: genre.name);
-            })
-          ],
-        ),
-      ),
+        if (isFullScreen) {
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
+              overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+        }
+
+        return Scaffold(
+          drawerEnableOpenDragGesture: false,
+          drawer: const DrawerWidget(),
+          appBar: isFullScreen ? null : const TVAppBar(showSearchBtn: true),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Platform.isIOS
+                    ? const TvChannelWidget()
+                    : Stack(
+                        children: [
+                          NewTVWidget(isFullScreen: isFullScreen),
+                          if (isFullScreen)
+                            Positioned(
+                              left: 5,
+                              top: 5,
+                              child: IconButton(
+                                  onPressed: () {
+                                    SystemChrome.setPreferredOrientations(
+                                        [DeviceOrientation.portraitUp]);
+                                  },
+                                  icon: Opacity(
+                                    opacity: isFullScreen ? 1 : 1,
+                                    child: const Icon(Icons.arrow_back,
+                                        color: Colors.red, size: 30),
+                                  )),
+                            ),
+                          Positioned(
+                            right: 4,
+                            bottom: isFullScreen ? 13 : 3,
+                            child: IconButton(
+                                onPressed: () {
+                                  isFullScreen
+                                      ? SystemChrome.setPreferredOrientations(
+                                          [DeviceOrientation.portraitUp])
+                                      : SystemChrome.setPreferredOrientations(
+                                          [DeviceOrientation.landscapeRight]);
+                                },
+                                icon: Opacity(
+                                  opacity: isFullScreen ? 1 : 1,
+                                  child: const Icon(Icons.fullscreen,
+                                      color: Colors.red, size: 30),
+                                )),
+                          )
+                        ],
+                      ),
+                ...ImagePath.genreList.map((genre) {
+                  if (isFullScreen) {
+                    return const SizedBox();
+                  }
+
+                  if (genre.name == 'News') {
+                    return const HomeNewsWidget();
+                  }
+
+                  return VideosWidget(path: genre.phpPath, title: genre.name);
+                })
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

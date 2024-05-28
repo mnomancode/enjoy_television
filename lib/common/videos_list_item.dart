@@ -66,24 +66,25 @@ class VideosListItem extends StatelessWidget {
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis),
                         ),
-                        const SizedBox()
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         const Icon(Icons.calendar_today_outlined,
-                        //             color: Colors.grey, size: 15),
-                        //         const SizedBox(width: 5),
-                        //         Text(dataModel.date?.split('T').first ?? '',
-                        //             style: Theme.of(context)
-                        //                 .textTheme
-                        //                 .labelSmall
-                        //                 ?.greyColor),
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),
+                        const SizedBox(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (dataModel.date != null)
+                              Row(
+                                children: [
+                                  const Icon(Icons.calendar_today_outlined,
+                                      color: Colors.grey, size: 15),
+                                  const SizedBox(width: 5),
+                                  Text(dataModel.date?.split('T').first ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall
+                                          ?.greyColor),
+                                ],
+                              ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

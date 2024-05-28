@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:enjoy_television/connectivity/payment_check.dart';
 import 'package:enjoy_television/dashboard/providers/index_bottom_bar.dart';
 import 'package:enjoy_television/genre/genre_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'favorites_screen.dart';
@@ -24,47 +27,69 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomBar = ref.watch(bottomBarNotifierProvider);
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          _buildScreens()[bottomBar.currentIndex],
-          FutureBuilder(
-            future: ref.watch(paymentStatusNotifierProvider.notifier).build(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.data?.paymentDone ?? true) {
-                  return Container();
-                } else {
-                  return NoPayment(message: snapshot.data?.message);
-                }
-              }
-              return Container();
-            },
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          border: Border(
-            top: BorderSide(
-              color: Theme.of(context).dividerColor,
-              width: 1,
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        bool isFullScreen = orientation == Orientation.landscape;
+
+        return PopScope(
+          canPop: !isFullScreen,
+          onPopInvoked: (didPop) {
+            log('didPop: $didPop');
+            if (didPop) {
+              SystemChrome.setPreferredOrientations(
+                  [DeviceOrientation.portraitUp]);
+            }
+          },
+          child: Scaffold(
+            drawerEnableOpenDragGesture: false,
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                _buildScreens()[bottomBar.currentIndex],
+                FutureBuilder(
+                  future:
+                      ref.watch(paymentStatusNotifierProvider.notifier).build(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.data?.paymentDone ?? true) {
+                        return Container();
+                      } else {
+                        return NoPayment(message: snapshot.data?.message);
+                      }
+                    }
+                    return Container();
+                  },
+                ),
+              ],
             ),
+            bottomNavigationBar: isFullScreen
+                ? null
+                : Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      border: Border(
+                        top: BorderSide(
+                          color: Theme.of(context).dividerColor,
+                          width: 1,
+                        ),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color:
+                                Theme.of(context).shadowColor.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 10),
+                      ],
+                    ),
+                    height: 80,
+                    child: Row(
+                        children: bottomBar.items
+                            .map((item) => BottomBatItem(item))
+                            .toList()),
+                  ),
           ),
-          boxShadow: [
-            BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 10),
-          ],
-        ),
-        height: 80,
-        child: Row(
-            children:
-                bottomBar.items.map((item) => BottomBatItem(item)).toList()),
-      ),
+        );
+      },
     );
   }
 }
