@@ -84,25 +84,6 @@ class NewsListItem extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                            (isFavorite)
-                                ? const SizedBox()
-                                : Row(
-                                    children: [
-                                      const Icon(Icons.calendar_today_outlined,
-                                          color: Colors.grey, size: 15),
-                                      const SizedBox(width: 5),
-                                      Text(
-                                        DateFormat('dd MMMM yyyy').format(
-                                            DateTime.tryParse(
-                                                    newsItem.date ?? '') ??
-                                                DateTime.now()),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall
-                                            ?.greyColor,
-                                      ),
-                                    ],
-                                  ),
                             if (newsItem.readTime != null) ...[
                               const SizedBox(width: 10),
                               Row(
@@ -111,7 +92,7 @@ class NewsListItem extends StatelessWidget {
                                       size: 15, color: Colors.grey),
                                   const SizedBox(width: 5),
                                   Text(
-                                    '${newsItem.readTime ?? ''}min read',
+                                    '${newsItem.readTime ?? ''} min read',
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelSmall

@@ -49,12 +49,12 @@ class HomeScreen extends StatelessWidget {
                                   icon: Opacity(
                                     opacity: isFullScreen ? 1 : 1,
                                     child: const Icon(Icons.arrow_back,
-                                        color: Colors.red, size: 30),
+                                        color: Colors.white, size: 30),
                                   )),
                             ),
                           Positioned(
-                            right: 4,
-                            bottom: isFullScreen ? 13 : 3,
+                            right: isFullScreen ? 72 : 3,
+                            bottom: isFullScreen ? -10 : 1.5,
                             child: IconButton(
                                 onPressed: () {
                                   isFullScreen
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                                 icon: Opacity(
                                   opacity: isFullScreen ? 1 : 1,
                                   child: const Icon(Icons.fullscreen,
-                                      color: Colors.red, size: 30),
+                                      color: Colors.white, size: 30),
                                 )),
                           )
                         ],

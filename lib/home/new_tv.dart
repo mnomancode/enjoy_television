@@ -12,9 +12,17 @@ class NewTVWidget extends StatefulWidget {
 class _NewTVWidgetState extends State<NewTVWidget> {
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-        aspectRatio: 16 / (widget.isFullScreen ? 8 : 9),
-        child: const MyWebView());
+    return widget.isFullScreen
+        ? Container(
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 70),
+            child: const MyWebView(),
+          )
+        : AspectRatio(
+            aspectRatio:
+                (widget.isFullScreen ? 2 : 16) / (widget.isFullScreen ? 1 : 9),
+            child: const MyWebView());
   }
 }
 
