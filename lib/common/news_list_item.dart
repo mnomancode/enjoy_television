@@ -28,6 +28,7 @@ class NewsListItem extends StatelessWidget {
             'content': newsItem.htmlContent ?? '',
             'date': newsItem.date ?? '',
             'pagePath': newsItem.pagePath ?? '',
+            'image': newsItem.image ?? '',
           }),
           child: Card(
             margin: const EdgeInsets.all(10),

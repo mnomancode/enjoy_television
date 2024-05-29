@@ -60,6 +60,8 @@ class DataModel with _$DataModel {
     String? date,
     String? pagePath,
     String? category,
+    String? id,
+    String? htmlContent,
   }) = _DataModel;
 
   factory DataModel.fromJson(Map<String, dynamic> json) =>

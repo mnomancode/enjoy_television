@@ -26,6 +26,8 @@ mixin _$DataModel {
   String? get date => throw _privateConstructorUsedError;
   String? get pagePath => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get htmlContent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +46,9 @@ abstract class $DataModelCopyWith<$Res> {
       String videoUrl,
       String? date,
       String? pagePath,
-      String? category});
+      String? category,
+      String? id,
+      String? htmlContent});
 }
 
 /// @nodoc
@@ -66,6 +70,8 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
     Object? date = freezed,
     Object? pagePath = freezed,
     Object? category = freezed,
+    Object? id = freezed,
+    Object? htmlContent = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -92,6 +98,14 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      htmlContent: freezed == htmlContent
+          ? _value.htmlContent
+          : htmlContent // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -110,7 +124,9 @@ abstract class _$$DataModelImplCopyWith<$Res>
       String videoUrl,
       String? date,
       String? pagePath,
-      String? category});
+      String? category,
+      String? id,
+      String? htmlContent});
 }
 
 /// @nodoc
@@ -130,6 +146,8 @@ class __$$DataModelImplCopyWithImpl<$Res>
     Object? date = freezed,
     Object? pagePath = freezed,
     Object? category = freezed,
+    Object? id = freezed,
+    Object? htmlContent = freezed,
   }) {
     return _then(_$DataModelImpl(
       title: null == title
@@ -156,6 +174,14 @@ class __$$DataModelImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      htmlContent: freezed == htmlContent
+          ? _value.htmlContent
+          : htmlContent // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -169,7 +195,9 @@ class _$DataModelImpl implements _DataModel {
       required this.videoUrl,
       this.date,
       this.pagePath,
-      this.category});
+      this.category,
+      this.id,
+      this.htmlContent});
 
   factory _$DataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataModelImplFromJson(json);
@@ -186,10 +214,14 @@ class _$DataModelImpl implements _DataModel {
   final String? pagePath;
   @override
   final String? category;
+  @override
+  final String? id;
+  @override
+  final String? htmlContent;
 
   @override
   String toString() {
-    return 'DataModel(title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, date: $date, pagePath: $pagePath, category: $category)';
+    return 'DataModel(title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, date: $date, pagePath: $pagePath, category: $category, id: $id, htmlContent: $htmlContent)';
   }
 
   @override
@@ -206,13 +238,16 @@ class _$DataModelImpl implements _DataModel {
             (identical(other.pagePath, pagePath) ||
                 other.pagePath == pagePath) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.htmlContent, htmlContent) ||
+                other.htmlContent == htmlContent));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, imageUrl, videoUrl, date, pagePath, category);
+  int get hashCode => Object.hash(runtimeType, title, imageUrl, videoUrl, date,
+      pagePath, category, id, htmlContent);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +270,9 @@ abstract class _DataModel implements DataModel {
       required final String videoUrl,
       final String? date,
       final String? pagePath,
-      final String? category}) = _$DataModelImpl;
+      final String? category,
+      final String? id,
+      final String? htmlContent}) = _$DataModelImpl;
 
   factory _DataModel.fromJson(Map<String, dynamic> json) =
       _$DataModelImpl.fromJson;
@@ -252,6 +289,10 @@ abstract class _DataModel implements DataModel {
   String? get pagePath;
   @override
   String? get category;
+  @override
+  String? get id;
+  @override
+  String? get htmlContent;
   @override
   @JsonKey(ignore: true)
   _$$DataModelImplCopyWith<_$DataModelImpl> get copyWith =>

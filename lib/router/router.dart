@@ -62,6 +62,7 @@ final router = GoRouter(
                     content: queryParameters['content'] ?? '',
                     date: queryParameters['date'] ?? '',
                     pagePath: queryParameters['pagePath'] ?? '',
+                    image: queryParameters['image'] ?? '',
                   ));
                 },
               ),

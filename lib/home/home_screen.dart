@@ -53,8 +53,8 @@ class HomeScreen extends StatelessWidget {
                                   )),
                             ),
                           Positioned(
-                            right: isFullScreen ? 72 : 3,
-                            bottom: isFullScreen ? -10 : 1.5,
+                            right: isFullScreen ? 83 : 3,
+                            bottom: isFullScreen ? 1 : 1.5,
                             child: IconButton(
                                 onPressed: () {
                                   isFullScreen

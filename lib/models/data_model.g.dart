@@ -14,6 +14,8 @@ _$DataModelImpl _$$DataModelImplFromJson(Map<String, dynamic> json) =>
       date: json['date'] as String?,
       pagePath: json['pagePath'] as String?,
       category: json['category'] as String?,
+      id: json['id'] as String?,
+      htmlContent: json['htmlContent'] as String?,
     );
 
 Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
@@ -24,6 +26,8 @@ Map<String, dynamic> _$$DataModelImplToJson(_$DataModelImpl instance) =>
       'date': instance.date,
       'pagePath': instance.pagePath,
       'category': instance.category,
+      'id': instance.id,
+      'htmlContent': instance.htmlContent,
     };
 
 // **************************************************************************

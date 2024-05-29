@@ -10,11 +10,13 @@ class NewsReadScreen extends StatelessWidget {
       {super.key,
       required this.id,
       required this.title,
+      required this.image,
       required this.content,
       required this.date,
       required this.pagePath});
   final String id;
   final String title;
+  final String image;
   final String content;
   final String date;
   final String pagePath;
@@ -33,6 +35,7 @@ class NewsReadScreen extends StatelessWidget {
                 title: title,
                 htmlContent: content,
                 date: date,
+                image: image,
                 pagePath: pagePath),
           ),
           IconButton(

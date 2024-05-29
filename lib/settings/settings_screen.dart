@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               future: NotificationHelper().checkNotification(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return const CircularProgressIndicator(color: Colors.red);
                 }
                 return Switch(
                   value: snapshot.data ?? false,

@@ -94,7 +94,7 @@ class _SearchResultsState extends ConsumerState<SearchResults> {
         );
       },
       loading: () => const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(color: Colors.red),
       ),
       error: (error, stack) => const Center(child: Text('No data found')),
     );
