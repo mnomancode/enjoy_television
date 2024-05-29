@@ -44,6 +44,7 @@ class UpdatesScreen extends ConsumerWidget {
                             title: data.title,
                             imageUrl: data.image ?? '',
                             htmlContent: data.htmlContent ?? '',
+                            pagePath: data.pagePath ?? '',
                             videoUrl: '',
                             category: 'NEWS',
                             date: DateFormat('dd MMMM yyyy')

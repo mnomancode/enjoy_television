@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:enjoy_television/models/data_model.dart';
-import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
