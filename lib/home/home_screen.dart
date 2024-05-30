@@ -32,45 +32,46 @@ class HomeScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Platform.isIOS
-                    ? const TvChannelWidget()
-                    : Stack(
-                        children: [
-                          NewTVWidget(isFullScreen: isFullScreen),
-                          if (isFullScreen)
-                            Positioned(
-                              left: 5,
-                              top: 5,
-                              child: IconButton(
-                                  onPressed: () {
-                                    SystemChrome.setPreferredOrientations(
-                                        [DeviceOrientation.portraitUp]);
-                                  },
-                                  icon: Opacity(
-                                    opacity: isFullScreen ? 1 : 1,
-                                    child: const Icon(Icons.arrow_back,
-                                        color: Colors.white, size: 30),
-                                  )),
-                            ),
-                          Positioned(
-                            right: isFullScreen ? 83 : 3,
-                            bottom: isFullScreen ? 1 : 1.5,
-                            child: IconButton(
-                                onPressed: () {
-                                  isFullScreen
-                                      ? SystemChrome.setPreferredOrientations(
-                                          [DeviceOrientation.portraitUp])
-                                      : SystemChrome.setPreferredOrientations(
-                                          [DeviceOrientation.landscapeRight]);
-                                },
-                                icon: Opacity(
-                                  opacity: isFullScreen ? 1 : 1,
-                                  child: const Icon(Icons.fullscreen,
-                                      color: Colors.white, size: 30),
-                                )),
-                          )
-                        ],
+                // Platform.isIOS
+                //     ? const TvChannelWidget()
+                //     :
+                Stack(
+                  children: [
+                    NewTVWidget(isFullScreen: isFullScreen),
+                    if (isFullScreen)
+                      Positioned(
+                        left: 5,
+                        top: 5,
+                        child: IconButton(
+                            onPressed: () {
+                              SystemChrome.setPreferredOrientations(
+                                  [DeviceOrientation.portraitUp]);
+                            },
+                            icon: Opacity(
+                              opacity: isFullScreen ? 1 : 1,
+                              child: const Icon(Icons.arrow_back,
+                                  color: Colors.white, size: 30),
+                            )),
                       ),
+                    Positioned(
+                      right: isFullScreen ? 83 : 3,
+                      bottom: isFullScreen ? 1 : 1.5,
+                      child: IconButton(
+                          onPressed: () {
+                            isFullScreen
+                                ? SystemChrome.setPreferredOrientations(
+                                    [DeviceOrientation.portraitUp])
+                                : SystemChrome.setPreferredOrientations(
+                                    [DeviceOrientation.landscapeRight]);
+                          },
+                          icon: Opacity(
+                            opacity: isFullScreen ? 1 : 1,
+                            child: const Icon(Icons.fullscreen,
+                                color: Colors.white, size: 30),
+                          )),
+                    )
+                  ],
+                ),
                 ...ImagePath.genreList.map((genre) {
                   if (isFullScreen) {
                     return const SizedBox();

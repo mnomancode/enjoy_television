@@ -1,4 +1,4 @@
-package com.stream.enjoy_television
+package net.fluidstream.enjoytelevision
 
 import io.flutter.embedding.android.FlutterActivity
 

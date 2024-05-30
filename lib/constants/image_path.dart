@@ -13,7 +13,7 @@ class ImagePath {
   static const String videoClip = 'assets/images/genre/video_clip.jpeg';
 
   static const String shareAppText =
-      'Check out this app Download it here: https://play.google.com/store/apps/details?id=com.stream.enjoy_television';
+      'Check out this app Download it here: https://play.google.com/store/apps/details?id=net.fluidstream.enjoytelevision';
 
   static List<Genre> genreList = const [
     Genre(

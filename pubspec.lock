@@ -65,15 +65,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.19"
-  better_player:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: f6a77cf6fbb515f01aa9fb459b2ee739de3e724c
-      url: "https://github.com/matthewrice345/betterplayer.git"
-    source: git
-    version: "0.0.83"
   boolean_selector:
     dependency: transitive
     description:
@@ -1182,14 +1173,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.3"
-  sqlite3_flutter_libs:
-    dependency: "direct main"
-    description:
-      name: sqlite3_flutter_libs
-      sha256: "1e62698dc1ab396152ccaf3b3990d826244e9f3c8c39b51805f209adcd6dbea3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.22"
   sqlparser:
     dependency: transitive
     description:
@@ -1414,14 +1397,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
-  visibility_detector:
-    dependency: transitive
-    description:
-      name: visibility_detector
-      sha256: "15c54a459ec2c17b4705450483f3d5a2858e733aee893dcee9d75fd04814940d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3"
   vm_service:
     dependency: transitive
     description:

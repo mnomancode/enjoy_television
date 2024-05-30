@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:enjoy_television/connectivity/app_conectivity.dart';
-import 'package:enjoy_television/connectivity/payment_check.dart';
 import 'package:enjoy_television/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
