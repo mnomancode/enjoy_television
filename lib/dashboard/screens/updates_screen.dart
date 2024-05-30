@@ -17,6 +17,8 @@ class UpdatesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final updates = ref.watch(updatesNotifierProvider);
 
+    final bool isIPad = MediaQuery.of(context).size.width > 600;
+
     return Scaffold(
       drawerEnableOpenDragGesture: false,
       appBar: const TVAppBar(),
@@ -28,8 +30,16 @@ class UpdatesScreen extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: threeItems ? 3 : 2,
-                childAspectRatio: threeItems ? 0.55 : 0.75,
+                crossAxisCount: threeItems
+                    ? isIPad
+                        ? 5
+                        : 3
+                    : 2,
+                childAspectRatio: threeItems
+                    ? isIPad
+                        ? 0.7
+                        : 0.55
+                    : 0.75,
                 crossAxisSpacing: 0,
                 mainAxisSpacing: 0,
               ),
@@ -155,6 +165,8 @@ class UpdatesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isIPad = MediaQuery.of(context).size.width > 600;
+
     return GestureDetector(
       onTap: () {
         if (data.videoUrl.isNotEmpty) {
@@ -206,8 +218,12 @@ class UpdatesCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Text(data.title,
                         style: threeItems
-                            ? Theme.of(context).textTheme.titleSmall
-                            : Theme.of(context).textTheme.titleMedium,
+                            ? Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontSize: isIPad ? 18 : null,
+                                )
+                            : Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontSize: isIPad ? 18 : null,
+                                ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis),
                   ),
@@ -218,7 +234,11 @@ class UpdatesCard extends StatelessWidget {
                     child: Text((data.category)?.toUpperCase() ?? '',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: Colors.blue,
-                              fontSize: threeItems ? 10 : null,
+                              fontSize: threeItems
+                                  ? isIPad
+                                      ? 16
+                                      : 10
+                                  : null,
                             )),
                   ),
                   SizedBox(height: threeItems ? 4 : 8),
@@ -231,12 +251,21 @@ class UpdatesCard extends StatelessWidget {
                               .labelSmall
                               ?.greyColor
                               .copyWith(
-                                fontSize: threeItems ? 9 : null,
+                                fontSize: threeItems
+                                    ? isIPad
+                                        ? 12
+                                        : 9
+                                    : null,
                               )),
                       SizedBox(width: threeItems ? 7 : 10),
                     ],
                   ),
-                  SizedBox(height: threeItems ? 22 : 28),
+                  SizedBox(
+                      height: threeItems
+                          ? isIPad
+                              ? 30
+                              : 22
+                          : 28),
                 ],
               ),
             ),
@@ -246,7 +275,11 @@ class UpdatesCard extends StatelessWidget {
               left: 0,
               child: Container(
                 alignment: Alignment.center,
-                height: threeItems ? 18 : 25,
+                height: threeItems
+                    ? isIPad
+                        ? 25
+                        : 18
+                    : 25,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.blue,
@@ -257,7 +290,12 @@ class UpdatesCard extends StatelessWidget {
                 ),
                 child: Text('Newly Added',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Colors.white, fontSize: threeItems ? 10 : null)),
+                        color: Colors.white,
+                        fontSize: threeItems
+                            ? isIPad
+                                ? 12
+                                : 10
+                            : null)),
               ),
             )
           ],

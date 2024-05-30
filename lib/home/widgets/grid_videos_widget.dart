@@ -23,6 +23,7 @@ class GridVideosWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(dataModelNotifierProvider(path));
+    final isIPad = MediaQuery.of(context).size.width > 600;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -38,8 +39,8 @@ class GridVideosWidget extends ConsumerWidget {
                 child: GridView.builder(
                   addAutomaticKeepAlives: true,
                   padding: EdgeInsets.zero,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: isIPad ? 5 : 2, childAspectRatio: 1),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: data.length,
@@ -88,7 +89,10 @@ class GridVideosWidget extends ConsumerWidget {
                                   data[index].title,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.titleSmall,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(fontSize: isIPad ? 18 : null),
                                 ),
                               ),
                               const Spacer(),
@@ -104,7 +108,9 @@ class GridVideosWidget extends ConsumerWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelSmall
-                                            ?.greyColor,
+                                            ?.greyColor
+                                            .copyWith(
+                                                fontSize: isIPad ? 16 : null),
                                       ),
                                     ),
                                   ],

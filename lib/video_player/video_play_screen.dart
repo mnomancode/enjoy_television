@@ -60,6 +60,7 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
 
     return OrientationBuilder(builder: (context, orientation) {
       final bool isFullScreen = orientation == Orientation.landscape;
+      final isIpad = MediaQuery.of(context).size.width > 600;
 
       return Scaffold(
         appBar: isFullScreen
@@ -79,7 +80,10 @@ class _VidePlayerScreenState extends ConsumerState<VidePlayerScreen> {
                 height: 80,
                 child: Text(
                   videProvider?.title ?? widget.title ?? '',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: isIpad ? 18 : null,
+                        fontWeight: isIpad ? FontWeight.bold : null,
+                      ),
                   maxLines: 3,
                 ),
               ),

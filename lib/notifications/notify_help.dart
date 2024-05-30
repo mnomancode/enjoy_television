@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -9,11 +10,12 @@ class NotificationHelper {
   // in main before runApp
   // NotificationHelper().initializeNotification();
   //
+
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   /// Initialize notification
-  initializeNotification() async {
+  Future<NotificationAppLaunchDetails?> initializeNotification() async {
     log('NotificationHelper: initializeNotification');
     var initializationSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: true,
@@ -24,8 +26,7 @@ class NotificationHelper {
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings("@mipmap/ic_launcher");
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
@@ -42,15 +43,15 @@ class NotificationHelper {
       android: initializationSettingsAndroid,
     );
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+
+    return notificationAppLaunchDetails;
   }
 
   /// Request IOS permissions
   void requestIOSPermissions() {
-    // PermissionStatus status = await Permission.notification.request();
-    //       if (status.isGranted) {
-    //         // notification permission is granted
-    //       }
-    //       else {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
@@ -59,7 +60,6 @@ class NotificationHelper {
           badge: true,
           sound: true,
         );
-    // }
   }
 
   Future<List<PendingNotificationRequest>>

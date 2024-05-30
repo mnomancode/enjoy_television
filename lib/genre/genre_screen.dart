@@ -10,6 +10,7 @@ class GenreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isIPad = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       drawer: const DrawerWidget(),
       drawerEnableOpenDragGesture: false,
@@ -34,7 +35,7 @@ class GenreScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 150,
+                  height: isIPad ? 250 : 150,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -60,7 +61,12 @@ class GenreScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(genre.name,
-                            style: Theme.of(context).textTheme.titleLarge),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontSize: isIPad ? 40 : null,
+                                )),
                       ),
                     ],
                   ),

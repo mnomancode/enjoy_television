@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../notifications/notify_help.dart';
 import 'favorites_screen.dart';
 import '../../home/home_screen.dart';
 import '../../utils/payment_error.dart';
 import 'updates_screen.dart';
 
-class DashboardScreen extends ConsumerWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   List<Widget> _buildScreens() {
@@ -25,7 +26,29 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  @override
+  void initState() {
+    gotoUpdatesScreen(ref);
+
+    super.initState();
+  }
+
+  gotoUpdatesScreen(WidgetRef ref) async {
+    final notificationData = await notificationHelper.initializeNotification();
+    if (notificationData != null) {
+      log('notificationData: ${notificationData.didNotificationLaunchApp}');
+      if (notificationData.didNotificationLaunchApp) {
+        ref.read(bottomBarNotifierProvider.notifier).updateCurrentIndex(3);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final bottomBar = ref.watch(bottomBarNotifierProvider);
     return OrientationBuilder(
       builder: (context, orientation) {
@@ -45,7 +68,7 @@ class DashboardScreen extends ConsumerWidget {
             body: Stack(
               alignment: Alignment.center,
               children: [
-                _buildScreens()[bottomBar.currentIndex],
+                widget._buildScreens()[bottomBar.currentIndex],
                 FutureBuilder(
                   future:
                       ref.watch(paymentStatusNotifierProvider.notifier).build(),
